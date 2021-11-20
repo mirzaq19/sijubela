@@ -1,0 +1,38 @@
+/* Common */
+.bg-blue {
+    background-color: #00c1eb;
+}
+.text-blue {
+    color: #00c1eb;
+}
+.bg-grey {
+    background-color: #a19a9a;
+}
+.text-grey {
+    color: #a19a9a;
+}
+
+/* Navbar  */
+.find {
+    min-width: 100%;
+}
+
+/* Responsive */
+@media (min-width: 992px) {
+    /* Navbar */
+    .find {
+        min-width: 38rem;
+    }
+}
+@media (min-width: 1200px) {
+    /* Navbar */
+    .find {
+        min-width: 44rem;
+    }
+}
+@media (min-width: 1400px) {
+    /* Navbar */
+    .find {
+        min-width: 52rem;
+    }
+}
