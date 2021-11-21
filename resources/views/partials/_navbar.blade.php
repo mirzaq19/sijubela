@@ -1,9 +1,10 @@
-<nav class="navbar navbar-expand-lg navbar-light {{ true ? 'bg-blue' : 'bg-grey' }} py-3">
+<nav class="navbar navbar-expand-lg navbar-dark {{ true ? 'bg-blue' : 'bg-grey' }} py-3">
     <div class="container">
-        <a class="navbar-brand" href="#"><img src="{{ asset('img/logo.png') }}" alt="Logo" width="40"></a>
+        <a class="navbar-brand" href="#"><img src="{{ asset('img/logo.svg') }}" alt="Logo" width="40"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            {{-- <span class="navbar-toggler-icon"></span> --}}
+            <i class="fas fa-bars"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             @if (true)
@@ -23,7 +24,7 @@
             <div class="user navbar-nav {{ false ? 'ms-auto' : '' }}">
                 @if (true)
                     <div class="dropdown">
-                        <button class="btn dropdown-toggle text-white d-flex align-items-center" type="button"
+                        <button class="btn dropdown-toggle text-white d-flex align-items-center px-0" type="button"
                             id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-user-circle" style="font-size: 2rem"></i>
                             <span class="mx-2">Name</span>
@@ -39,12 +40,12 @@
                         </ul>
                     </div>
                 @elseif (true)
-                    <button class="btn text-white d-flex align-items-center">
+                    <button class="btn text-white d-flex align-items-center px-0">
                         <i class="fas fa-user-circle" style="font-size: 2rem"></i>
                         <span class="mx-2">Name</span>
                     </button>
                 @else
-                    <a class="text-white btn d-flex align-items-center" href="#">
+                    <a class="text-white btn d-flex align-items-center px-0" href="#">
                         <i class="fas fa-user-circle" style="font-size: 2rem"></i>
                         <span class="mx-2">Login</span>
                     </a>

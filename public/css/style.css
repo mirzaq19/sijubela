@@ -20,6 +20,14 @@
 .find {
     min-width: 100%;
 }
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.8) !important;
+    border-width: 2px;
+    padding: 0.45rem 1rem;
+}
+.navbar-toggler .fa-bars {
+    color: rgba(255, 255, 255, 0.8);
+}
 
 /* Content */
 .content {
