@@ -16,7 +16,10 @@
 
 <body>
     @include('partials._navbar')
-    @yield('content')
+    <div class="content">
+        @yield('content')
+    </div>
+    @include('partials._footer')
     @yield('beforescript')
     @include('partials._script')
     @yield('afterscript')

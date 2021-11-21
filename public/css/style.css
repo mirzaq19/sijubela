@@ -11,10 +11,19 @@
 .text-grey {
     color: #a19a9a;
 }
+.divider-white {
+    border-top: 2px solid #fff;
+    opacity: 0.6;
+}
 
 /* Navbar  */
 .find {
     min-width: 100%;
+}
+
+/* Content */
+.content {
+    min-height: 40rem;
 }
 
 /* Responsive */
