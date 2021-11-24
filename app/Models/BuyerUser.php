@@ -8,4 +8,26 @@ use Illuminate\Database\Eloquent\Model;
 class BuyerUser extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['id', 'timestamps'];
+
+    public function cart()
+    {
+        return $this->hasMany(Cart::class);
+    }
+
+    public function addresses()
+    {
+        return $this->belongsToMany(Address::class, DetailAddress::class);
+    }
+
+    public function testimonial()
+    {
+        return $this->hasMany(Testimonial::class);
+    }
+
+    public function order()
+    {
+        return $this->hasMany(Order::class);
+    }
 }
