@@ -19,9 +19,7 @@ class CreateLaptopImagesTable extends Migration
             $table->timestamps();
 
             // FK
-            $table->unsignedBigInteger('laptop_id');
-
-            $table->foreign('laptop_id')->references('id')->on('laptops');
+            $table->foreignId('laptop_id');
         });
     }
 

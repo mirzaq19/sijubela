@@ -22,11 +22,8 @@ class CreateOrdersTable extends Migration
             $table->timestamps();
 
             // FK
-            $table->unsignedBigInteger('buyer_user_id');
-            $table->unsignedBigInteger('payment_id');
-
-            $table->foreign('buyer_user_id')->references('id')->on('buyer_users');
-            $table->foreign('payment_id')->references('id')->on('payments');
+            $table->foreignId('buyer_user_id');
+            $table->foreignId('payment_id');
         });
     }
 

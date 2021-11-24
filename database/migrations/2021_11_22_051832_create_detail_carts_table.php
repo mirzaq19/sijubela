@@ -19,11 +19,8 @@ class CreateDetailCartsTable extends Migration
             $table->timestamps();
 
             // FK
-            $table->unsignedBigInteger('laptop_id');
-            $table->unsignedBigInteger('cart_id');
-
-            $table->foreign('laptop_id')->references('id')->on('laptops');
-            $table->foreign('cart_id')->references('id')->on('carts');
+            $table->foreignId('laptop_id');
+            $table->foreignId('cart_id');
         });
     }
 

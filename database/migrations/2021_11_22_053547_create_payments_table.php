@@ -20,6 +20,9 @@ class CreatePaymentsTable extends Migration
             $table->string('paymeny_account_name');
             $table->string('payment_account_number');
             $table->timestamps();
+
+            // FK
+            $table->foreignId('order_id');
         });
     }
 

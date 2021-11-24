@@ -17,11 +17,8 @@ class CreateDetailAddressesTable extends Migration
             $table->timestamps();
 
             // FK
-            $table->unsignedBigInteger('buyer_user_id');
-            $table->unsignedBigInteger('address_id');
-
-            $table->foreign('buyer_user_id')->references('id')->on('buyer_users');
-            $table->foreign('address_id')->references('id')->on('addresses');
+            $table->foreignId('buyer_user_id');
+            $table->foreignId('address_id');
         });
     }
 

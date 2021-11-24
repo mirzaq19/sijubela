@@ -21,8 +21,7 @@ class CreateBanksTable extends Migration
             $table->timestamps();
 
             // FK
-            $table->unsignedBigInteger('seller_user_id');
-            $table->foreign('seller_user_id')->references('id')->on('seller_users');
+            $table->foreignId('seller_user_id');
         });
     }
 

@@ -15,11 +15,13 @@ class CreateTestimonialsTable extends Migration
     {
         Schema::create('testimonials', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('buyer_user_id')->constrained('buyer_users');
-            $table->foreignId('laptop_id')->constrained('laptops');
             $table->integer('rating');
             $table->text('testimonial_desc')->nullable();
             $table->timestamps();
+
+            // FK
+            $table->foreignId('buyer_user_id');
+            $table->foreignId('laptop_id');
         });
     }
 

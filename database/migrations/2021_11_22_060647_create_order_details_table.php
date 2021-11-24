@@ -22,11 +22,8 @@ class CreateOrderDetailsTable extends Migration
             $table->timestamps();
 
             // FK
-            $table->unsignedBigInteger('order_id');
-            $table->unsignedBigInteger('laptop_id');
-
-            $table->foreign('order_id')->references('id')->on('orders');
-            $table->foreign('laptop_id')->references('id')->on('laptops');
+            $table->foreignId('order_id');
+            $table->foreignId('laptop_id');
         });
     }
 
