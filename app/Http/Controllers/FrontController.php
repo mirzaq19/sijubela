@@ -10,4 +10,9 @@ class FrontController extends Controller
     {
         return view('front.index');
     }
+
+    public function show()
+    {
+        return view('front.product');
+    }
 }

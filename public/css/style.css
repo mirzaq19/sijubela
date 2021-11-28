@@ -1,6 +1,7 @@
 /* Common */
 body {
     font-size: 12px;
+    background: #eee;
 }
 
 .bg-blue {
@@ -24,6 +25,16 @@ body {
 .divider-white {
     border-top: 2px solid #fff;
     opacity: 0.6;
+}
+
+.btn-blue {
+    background-color: #00c1eb;
+    color: #fff;
+    border: 1px solid #00c1eb;
+}
+.btn-blue:hover {
+    background-color: #fff;
+    color: #00c1eb;
 }
 
 /* Navbar  */

@@ -7,21 +7,6 @@
 
     <!-- Demo styles -->
     <style>
-        html,
-        body {
-            position: relative;
-            height: 100%;
-        }
-
-        body {
-            background: #eee;
-            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-            font-size: 14px;
-            color: #000;
-            margin: 0;
-            padding: 0;
-        }
-
         .swiper {
             width: 100%;
             padding-top: 2rem;
