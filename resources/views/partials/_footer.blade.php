@@ -4,7 +4,10 @@
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-lg-4 d-flex justify-content-md-start justify-content-center  ">
-                        <img class="h-100" src="{{ asset('img/logo.svg') }}" alt="Logo">
+                        <a href="{{ route('beranda') }}">
+
+                            <img class="h-100" src="{{ asset('img/logo.svg') }}" alt="Logo">
+                        </a>
                     </div>
                     <div class="col-lg-8 text-md-start text-center">
                         <h1>Toko Sijubela</h1>

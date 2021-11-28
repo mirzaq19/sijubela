@@ -1,4 +1,4 @@
-@extends('front.layout')
+@extends('layout')
 @section('title', 'Beranda')
 
 @section('aftercss')

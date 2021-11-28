@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\PembeliController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,6 @@ use App\Http\Controllers\FrontController;
 |
 */
 
-Route::get('/', [frontController::class, 'index']);
-Route::get('/product', [frontController::class, 'show']);
+Route::get('/', [FrontController::class, 'index'])->name('beranda');
+Route::get('/product', [FrontController::class, 'show']);
+Route::get('/cart',[PembeliController::class, 'cart'])->name('cart');

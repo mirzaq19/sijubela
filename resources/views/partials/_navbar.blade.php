@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark {{ true ? 'bg-blue' : 'bg-grey' }} py-3">
     <div class="container">
-        <a class="navbar-brand" href="#"><img src="{{ asset('img/logo.svg') }}" alt="Logo" width="40"></a>
+        <a class="navbar-brand" href="{{ route('beranda') }}"><img src="{{ asset('img/logo.svg') }}" alt="Logo"
+                width="40"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             {{-- <span class="navbar-toggler-icon"></span> --}}
@@ -9,7 +10,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             @if (true)
                 <div class="find mx-auto my-2 my-lg-0">
-                    <form class="d-flex">
+                    <form class="d-flex align-items-center">
                         <div class="input-group bg-light rounded">
                             <input type="text" class="form-control border border-white"
                                 placeholder="Yuk cari laptop kamu" aria-label="Recipient's username"
@@ -17,6 +18,10 @@
                             <button class="btn btn-outline-light" type="button" id="button-addon2"><i
                                     class="fas fa-search text-blue"></i></button>
                         </div>
+                        @if (true)
+                            <a class="m-0 ms-4 text-white h3" href="{{ route('cart') }}"><i
+                                    class="fas fa-shopping-cart"></i></a>
+                        @endif
                     </form>
                 </div>
             @endif
