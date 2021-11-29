@@ -24,9 +24,12 @@ Route::get('/cart', [PembeliController::class, 'cart'])->name('cart');
 
 
 // Login & Register
-Route::get('/buyer-login', [PembeliController::class, 'login'])->name('pembeli-login');
+Route::get('/login', [PembeliController::class, 'login'])->name('pembeli-login');
 Route::get('/seller-login', [PenjualController::class, 'login'])->name('penjual-login');
 Route::get('/admin-login', [AdminController::class, 'login'])->name('admin-login');
 
-Route::get('/buyer-register', [PembeliController::class, 'register'])->name('pembeli-register');
+Route::get('/register', [PembeliController::class, 'register'])->name('pembeli-register');
 Route::get('/seller-register', [PenjualController::class, 'register'])->name('penjual-register');
+
+Route::post('/register', [PembeliController::class, 'store']);
+Route::post('/seller-register', [PenjualController::class, 'store']);

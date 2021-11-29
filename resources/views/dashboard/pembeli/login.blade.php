@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'Login User')
+@section('title', 'Login')
 
 @section('aftercss')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
@@ -22,6 +22,15 @@
 @endsection
 
 @section('content')
+    @if (session()->has('success'))
+        <div class="container mt-5">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    @endif
+
     <div class="container my-5 bg-white">
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-md-9 col-lg-6 col-xl-5">
@@ -30,14 +39,14 @@
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                 <form>
                     <div class="divider d-flex align-items-center my-4">
-                        <h1 class="text-center fw-bold mx-3 mb-0 text-blue">Login User</h1>
+                        <h1 class="text-center fw-bold mx-3 mb-0 text-blue">Login</h1>
                     </div>
 
                     <!-- Username input -->
                     <div class="form-outline mb-4">
                         <label class="form-label" for="username">Username</label>
-                        <input type="text" id="text" class="form-control form-control-lg"
-                            placeholder="Enter your username" />
+                        <input type="text" id="text" class="form-control form-control-lg" placeholder="Enter your username"
+                            required />
                     </div>
 
                     <!-- Password input -->
@@ -45,7 +54,7 @@
                         <label class="form-label" for="password">Password</label>
                         <div class="input-group">
                             <input type="password" id="password" class="form-control form-control-lg"
-                                placeholder="Enter password" />
+                                placeholder="Enter password" required />
                             <span class="input-group-text">
                                 <i class="bi bi-eye-slash" id="togglePassword"></i>
                             </span>

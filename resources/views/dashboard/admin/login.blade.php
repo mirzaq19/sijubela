@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'Login User')
+@section('title', 'Login Admin')
 
 @section('aftercss')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
@@ -32,15 +32,16 @@
             <!-- Username input -->
             <div class="form-outline mb-4">
                 <label class="form-label" for="username">Username</label>
-                <input type="text" id="text" class="form-control form-control-lg" placeholder="Enter your username" />
+                <input type="text" id="text" class="form-control form-control-lg" placeholder="Enter your username"
+                    required />
             </div>
 
             <!-- Password input -->
             <div class="form-outline mb-3">
                 <label class="form-label" for="password">Password</label>
                 <div class="input-group">
-                    <input type="password" id="password" class="form-control form-control-lg"
-                        placeholder="Enter password" />
+                    <input type="password" id="password" class="form-control form-control-lg" placeholder="Enter password"
+                        required />
                     <span class="input-group-text">
                         <i class="bi bi-eye-slash" id="togglePassword"></i>
                     </span>
