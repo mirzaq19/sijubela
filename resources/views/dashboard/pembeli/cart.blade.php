@@ -7,6 +7,10 @@
             padding: .5rem;
         }
 
+        .content {
+            min-height: 0;
+        }
+
     </style>
 @endsection
 
@@ -23,32 +27,34 @@
         <div class="list-group">
             <li class="list-group-item">
                 <div class="row">
-                    <div class="col-3 d-flex justify-content-between align-items-center">
+                    <div class="col-sm-3 d-flex justify-content-start justify-content-sm-between align-items-center">
                         <input class="form-check-input product-check" type="checkbox" value="">
-                        <img class="img-fluid" src="{{ asset('/img/product/l1.png') }}" alt="Product">
+                        <img class="img-fluid mx-auto m-0" src="{{ asset('/img/product/l1.png') }}" alt="Product">
                     </div>
-                    <div class="col-9">
+                    <div class="col-sm-9 mt-3 m-sm-0">
                         <h5 class="mb-1">Asus Zephyrus Intel Core i7 GTX 1650</h5>
                         <p class="mb-1">Rp. 12.499.000</p>
                         <p class="mb-1">Jumlah : 1</p>
                         <p class="mb-1">Total : Rp. 12.499.000</p>
-                        <button class="btn btn-danger mt-2"><i class="fas fa-trash"></i> Hapus</button>
+                        <p>Note : Harap segera dikirim ya</p>
+                        <button class="btn btn-danger"><i class="fas fa-trash"></i> Hapus</button>
 
                     </div>
                 </div>
             </li>
             <li class="list-group-item">
                 <div class="row">
-                    <div class="col-3 d-flex justify-content-between align-items-center">
+                    <div class="col-sm-3 d-flex justify-content-start justify-content-sm-between align-items-center">
                         <input class="form-check-input product-check" type="checkbox" value="">
-                        <img class="img-fluid" src="{{ asset('/img/product/l2.png') }}" alt="Product">
+                        <img class="img-fluid  mx-auto m-0" src="{{ asset('/img/product/l2.png') }}" alt="Product">
                     </div>
-                    <div class="col-9">
+                    <div class="col-9 mt-3 m-sm-0">
                         <h5 class="mb-1">Asus Yoga Intel Core i5 GTX 1650</h5>
                         <p class="mb-1">Rp. 8.499.000</p>
                         <p class="mb-1">Jumlah : 1</p>
                         <p class="mb-1">Total : Rp. 8.499.000</p>
-                        <button class="btn btn-danger mt-2"><i class="fas fa-trash"></i> Hapus</button>
+                        <p>Note : Harap segera dikirim ya</p>
+                        <button class="btn btn-danger"><i class="fas fa-trash"></i> Hapus</button>
                     </div>
                 </div>
             </li>
