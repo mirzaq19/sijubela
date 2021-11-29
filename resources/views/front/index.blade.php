@@ -7,6 +7,30 @@
 
     <!-- Demo styles -->
     <style>
+        .jumbotron {
+            background-image: url('{{ asset('img/asset/landing.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            height: 50vh;
+        }
+
+        .jumbotron:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 40vh;
+            background: -webkit-gradient(linear, left top, left bottom, from(rgba(27, 28, 30, 0)), color-stop(90%, rgba(27, 28, 30, 0.8)));
+            background: linear-gradient(180deg, rgba(27, 28, 30, 0) 0%, rgba(27, 28, 30, 0.8) 90%);
+        }
+
+        .jumbotron div {
+            position: relative;
+        }
+
         .swiper {
             width: 100%;
             padding-top: 2rem;
@@ -42,8 +66,19 @@
 @endsection
 
 @section('content')
+    <div class="jumbotron text-white">
+        <div class="container py-5">
+            <h1 class="display-4">Selamat Datang di Toko SIJUBELA</h1>
+            <p class="lead">Toko Jual Beli Laptop Bekas Maupun Baru</p>
+            <hr class="my-4">
+            <p>Silahkan pilih menu yang tersedia untuk melakukan pembelian laptop kamu</p>
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" href="#brand" role="button">Lihat produk</a>
+            </p>
+        </div>
+    </div>
     <div class="container my-5">
-        <div class="card">
+        <div class="card" id="brand">
             <h2 class="card-header text-center"><strong>Brand / Merk</strong></h2>
             <div class="card-body">
                 <!-- Swiper -->
