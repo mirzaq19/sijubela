@@ -190,9 +190,67 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal-success" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <p class="h1 text-blue my-4">
+                        <i class="fas fa-shopping-cart"></i>
+                    </p>
+                    <p class="fs-3">
+                        Laptop berhasil dimasukkan ke keranjang
+                    </p>
+                    <div class="mt-3">
+                        <button type="button" class="btn btn-secondary m-0 me-sm-3" data-bs-dismiss="modal">Lanjutkan
+                            Belanja</button>
+                        <a href="{{ route('cart') }}" class="btn btn-blue">Ke keranjang</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-failed" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <p class="h1 text-danger my-4">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </p>
+                    <p class="fs-3">
+                        Laptop gagal dimasukkan ke keranjang
+                    </p>
+                    <div class="mt-3">
+                        <button type="button" class="btn btn-secondary m-0 me-sm-3" data-bs-dismiss="modal">Lanjutkan
+                            Belanja</button>
+                        <a href="{{ route('cart') }}" class="btn btn-blue">Ke keranjang</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('afterscript')
+    @if (false)
+        <script>
+            var myModal = new bootstrap.Modal(document.getElementById('modal-success'), {
+                keyboard: false
+            });
+            myModal.show();
+        </script>
+    @endif
+    @if (false)
+        <script>
+            var myModal = new bootstrap.Modal(document.getElementById('modal-failed'), {
+                keyboard: false
+            });
+            myModal.show();
+        </script>
+    @endif
     <script>
         const price = document.getElementById('price');
         const stock = document.getElementById('stock');
