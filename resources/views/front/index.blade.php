@@ -14,6 +14,7 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
             height: 50vh;
+            position: relative;
         }
 
         .jumbotron:before {
@@ -22,7 +23,7 @@
             left: 0;
             right: 0;
             top: 0;
-            bottom: 40vh;
+            bottom: 0;
             background: -webkit-gradient(linear, left top, left bottom, from(rgba(27, 28, 30, 0)), color-stop(90%, rgba(27, 28, 30, 0.8)));
             background: linear-gradient(180deg, rgba(27, 28, 30, 0) 0%, rgba(27, 28, 30, 0.8) 90%);
         }
@@ -67,7 +68,7 @@
 
 @section('content')
     <div class="jumbotron text-white">
-        <div class="container py-5">
+        <div class="container py-5 text-center text-sm-start">
             <h1 class="display-4">Selamat Datang di Toko SIJUBELA</h1>
             <p class="lead">Toko Jual Beli Laptop Bekas Maupun Baru</p>
             <hr class="my-4">
