@@ -31,13 +31,23 @@
         </div>
     @endif
 
+    @if (session()->has('error'))
+        <div class="container mt-5">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    @endif
+
     <div class="container my-5 bg-white">
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-md-9 col-lg-6 col-xl-5">
                 <img src="{{ asset('/img/asset/login-laptop.png') }}" class="img-fluid" alt="laptop-image">
             </div>
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                <form>
+                <form action="/login" method="POST">
+                    @csrf
                     <div class="divider d-flex align-items-center my-4">
                         <h1 class="text-center fw-bold mx-3 mb-0 text-blue">Login</h1>
                     </div>
@@ -45,15 +55,21 @@
                     <!-- Username input -->
                     <div class="form-outline mb-4">
                         <label class="form-label" for="username">Username</label>
-                        <input type="text" id="text" class="form-control form-control-lg" placeholder="Enter your username"
-                            required />
+                        <input type="text" name="buyer_username" id="text"
+                            class="form-control form-control-lg @error('username') is-invalid @enderror"
+                            placeholder="Enter your username" required autofocus value="{{ old('username') }}" />
+                        @error('username')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     <!-- Password input -->
                     <div class="form-outline mb-3">
                         <label class="form-label" for="password">Password</label>
                         <div class="input-group">
-                            <input type="password" id="password" class="form-control form-control-lg"
+                            <input type="password" name="buyer_password" id="password" class="form-control form-control-lg"
                                 placeholder="Enter password" required />
                             <span class="input-group-text">
                                 <i class="bi bi-eye-slash" id="togglePassword"></i>
@@ -72,7 +88,7 @@
                     </div>
 
                     <div class="text-center text-lg-start mt-4 pt-2">
-                        <button type="button" class="btn btn-blue btn-lg"
+                        <button type="submit" class="btn btn-blue btn-lg"
                             style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
                         <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a
                                 href={{ route('pembeli-register') }} class="text-blue text-decoration-none">Register</a>
