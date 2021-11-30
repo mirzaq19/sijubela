@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SellerUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PenjualController extends Controller
 {
@@ -15,6 +16,10 @@ class PenjualController extends Controller
     public function register()
     {
         return view('dashboard.penjual.register');
+    }
+
+    public function dashboard(){
+        return view('dashboard.penjual.dashboard');
     }
 
     public function store(Request $request)
@@ -32,5 +37,29 @@ class PenjualController extends Controller
         SellerUser::create($validatedData);
 
         return redirect()->route('penjual-login')->with('success', 'Registration successfull! Please login');
+    }
+
+    public function authenticate(Request $request)
+    {
+        $credentials = $request->validate([
+            'seller_username' => 'required|min:5',
+            'seller_password' => 'required|min:6|max:255',
+        ]);
+
+        if (Auth::guard('seller_user')->attempt(['seller_username' => $credentials['seller_username'], 'password' => $credentials['seller_password']])) {
+            $request->session()->regenerate();
+            
+            return redirect()->intended('/dashboard');
+        }
+
+        return back()->with('error', 'Invalid username or password');
+    }
+
+    public function logout(Request $request){
+        Auth::guard('seller_user')->logout();
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+        return redirect()->route('beranda');
     }
 }

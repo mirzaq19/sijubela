@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\BuyerUser;
-use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PembeliController extends Controller
 {
@@ -38,5 +38,31 @@ class PembeliController extends Controller
         BuyerUser::create($validatedData);
 
         return redirect()->route('pembeli-login')->with('success', 'Registration successfull! Please login');
+    }
+
+
+
+    public function authenticate(Request $request)
+    {
+        $credentials = $request->validate([
+            'buyer_username' => 'required|min:5',
+            'buyer_password' => 'required|min:6|max:255',
+        ]);
+
+        if (Auth::guard('buyer_user')->attempt(['buyer_username' => $credentials['buyer_username'], 'password' => $credentials['buyer_password']])) {
+            $request->session()->regenerate();
+         
+            return redirect()->intended('/');
+        }
+
+        return back()->with('error', 'Invalid username or password');
+    }
+
+    public function logout(Request $request){
+        Auth::guard('buyer_user')->logout();
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+        return redirect()->route('beranda');
     }
 }

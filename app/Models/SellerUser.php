@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class SellerUser extends Model
+class SellerUser extends Authenticatable
 {
     use HasFactory;
 
@@ -19,5 +20,10 @@ class SellerUser extends Model
     public function sell_laptop()
     {
         return $this->hasMany(SellLaptop::class);
+    }
+
+    public function getAuthPassword()
+    {
+        return $this->seller_password;
     }
 }

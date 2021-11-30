@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class BuyerUser extends Model
+class BuyerUser extends Authenticatable
 {
     use HasFactory;
 
@@ -29,5 +30,10 @@ class BuyerUser extends Model
     public function order()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function getAuthPassword()
+    {
+        return $this->buyer_password;
     }
 }
