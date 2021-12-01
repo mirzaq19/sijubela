@@ -19,7 +19,7 @@ use App\Models\AdminUser;
 */
 
 // HOME
-Route::get('/', [FrontController::class, 'index'])->name('beranda')->middleware('guest','is_buyer');
+Route::get('/', [FrontController::class, 'index'])->name('beranda');
 
 // Login & Register
 // 1. GET
@@ -48,6 +48,19 @@ Route::post('/admin-logout', [AdminController::class, 'logout'])->name('admin-lo
 // PEMBELI
 Route::get('/product', [FrontController::class, 'show']);
 Route::get('/cart', [PembeliController::class, 'cart'])->name('cart')->middleware('is_buyer');
+
+// ORDER
+Route::get('/order', [PembeliController::class, 'orderindex'])->name('buyer-order.index');
+Route::get('/order/all', [PembeliController::class, 'orderall'])->name('buyer-order.all');
+Route::get('/order/notpay', [PembeliController::class, 'ordernotpay'])->name('buyer-order.notpay');
+Route::get('/order/packing', [PembeliController::class, 'orderpacking'])->name('buyer-order.packing');
+Route::get('/order/shipping', [PembeliController::class, 'ordershipping'])->name('buyer-order.shipping');
+Route::get('/order/finish', [PembeliController::class, 'orderfinish'])->name('buyer-order.finish');
+Route::get('/order/cancel', [PembeliController::class, 'ordercancel'])->name('buyer-order.cancel');
+
+// AKUN PEMBELI
+Route::get('/account', [PembeliController::class, 'accountdetail'])->name('buyer-account.detail');
+
 
 // PENJUAL
 Route::get('/dashboard', [PenjualController::class, 'dashboard'])->name('penjual-dashboard')->middleware('is_seller');
