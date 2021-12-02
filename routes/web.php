@@ -5,6 +5,9 @@ use App\Http\Controllers\FrontController;
 use App\Http\Controllers\PembeliController;
 use App\Http\Controllers\PenjualController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DashboardAdminCatalogController;
+use App\Http\Controllers\DashboardAdminOfferController;
+use App\Http\Controllers\DashboardAdminOrderController;
 use App\Models\AdminUser;
 
 /*
@@ -19,7 +22,7 @@ use App\Models\AdminUser;
 */
 
 // HOME
-Route::get('/', [FrontController::class, 'index'])->name('beranda')->middleware('guest','is_buyer');
+Route::get('/', [FrontController::class, 'index'])->name('beranda');
 
 // Login & Register
 // 1. GET
@@ -55,5 +58,8 @@ Route::get('/dashboard', [PenjualController::class, 'dashboard'])->name('penjual
 // ADMIN
 Route::get('/admin-dashboard', [AdminController::class, 'dashboard'])->name('admin-dashboard')->middleware('is_admin');
 
+Route::resource('/admin-dashboard/order_details', DashboardAdminOrderController::class)->middleware('is_admin');
+Route::resource('/admin-dashboard/laptops', DashboardAdminCatalogController::class)->middleware('is_admin');
+Route::resource('/admin-dashboard/sell_laptops', DashboardAdminOfferController::class)->middleware('is_admin');
 
 
