@@ -1,6 +1,6 @@
 /* Common */
 body {
-    font-size: 12px;
+    font-size: 15px;
     background: #eee;
 }
 
@@ -25,6 +25,15 @@ body {
 .divider-white {
     border-top: 2px solid #fff;
     opacity: 0.6;
+}
+
+.link-blue {
+    color: #000;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+.link-blue:hover {
+    color: #00c1eb;
 }
 
 .btn-blue {

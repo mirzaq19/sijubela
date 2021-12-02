@@ -65,4 +65,30 @@ class PembeliController extends Controller
         $request->session()->regenerateToken();
         return redirect()->route('beranda');
     }
+
+    public function orderindex(){
+        return redirect()->route('buyer-order.all');
+    }
+    public function orderall(){
+        return view('dashboard.pembeli.order');
+    }
+    public function ordernotpay(){
+        return view('dashboard.pembeli.order');
+    }
+    public function orderpacking(){
+        return view('dashboard.pembeli.order');
+    }
+    public function ordershipping(){
+        return view('dashboard.pembeli.order');
+    }
+    public function orderfinish(){
+        return view('dashboard.pembeli.order');
+    }
+    public function ordercancel(){
+        return view('dashboard.pembeli.order');
+    }
+
+    public function accountdetail(){
+        return view('dashboard.pembeli.account');
+    }
 }
