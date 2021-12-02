@@ -9,6 +9,8 @@ class Laptop extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id', 'timestamps'];
+    
     public function cart()
     {
         return $this->belongsToMany(Cart::class, DetailCart::class);
@@ -22,5 +24,5 @@ class Laptop extends Model
     public function testimonial()
     {
         return $this->hasMany(Testimonial::class);
-    }
+    } 
 }
