@@ -20,36 +20,49 @@
                 @include('partials._sidebaradmin')
             </div>
             <div class="col-lg-10 mt-2 rounded">
-                <div class="table-responsive bg-white">
+                @if (session()->has('success'))
+                    <div class="mb-2">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                @endif
+                <div class="table-responsive bg-white rounded">
                     <table class="table table-hover table-striped">
                         <thead>
                             <tr>
                                 <th class="text-center" scope="col">No</th>
-                                {{-- <th class="text-center" scope="col">Username</th> --}}
+                                <th class="text-center" scope="col">Username</th>
                                 <th class="text-center" scope="col">Laptop</th>
                                 <th class="text-center" scope="col">Order Status</th>
                                 <th class="text-center" scope="col">Shipping Status</th>
                                 <th class="text-center" scope="col">Total</th>
-                                <th class="text-center" scope="col">Action</th>
+                                <th class="text-center" scope="col">Detail</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($orders as $order)
                                 <tr>
                                     <th class="text-center" scope="row">{{ $loop->iteration }}</th>
-                                    {{-- <td class="text-center">{{ $order->orders->buyer_users->buyer_username }}</td> --}}
-                                    <td class="text-center">{{ $order->laptops->laptop_name }}</td>
-                                    <td class="text-center">{{ $order->orders->order_status }}</td>
-                                    <td class="text-center">{{ $order->orders->shipping_status }}</td>
-                                    <td class="text-center">Rp
-                                        {{ number_format($order->orders->total_price, 0, ',', '.') }}
+                                    <td class="text-center">
+                                        {{ $buyers->where('id', '==', $order->buyer_user_id)->pluck('buyer_username')->first() }}
                                     </td>
                                     <td class="text-center">
-                                        <a href="/admin-dashboard/order_details/#" class="badge bg-info"><i
+                                        {{ $laptops->where(
+                                                'id',
+                                                '==',
+                                                $orderdetails->where('order_id', '==', $order->id)->pluck('laptop_id')->first(),
+                                            )->pluck('laptop_name')->first() }}
+                                    </td>
+                                    <td class="text-center">{{ Str::ucfirst($order->order_status) }}</td>
+                                    <td class="text-center">{{ Str::ucfirst($order->shipping_status) }}</td>
+                                    <td class="text-center">Rp
+                                        {{ number_format($order->total_price, 0, ',', '.') }}
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="/admin-dashboard/orders/{{ $order->id }}" class="badge bg-info"><i
                                                 class="fas fa-info-circle"></i></a>
-                                        <a href="#" class="badge bg-warning"><i class="far fa-edit"></i></a>
-                                        <a href="#" class="badge bg-danger"><i class="far fa-trash-alt"></i></a>
-
                                     </td>
                                 </tr>
                             @endforeach

@@ -3,8 +3,8 @@
         class="list-group-item list-group-item-action {{ Request::is('admin-dashboard') ? 'active' : '' }}">
         Dashboard
     </a>
-    <a href="/admin-dashboard/order_details"
-        class="list-group-item list-group-item-action {{ Request::is('admin-dashboard/order_details') ? 'active' : '' }}">
+    <a href="/admin-dashboard/orders"
+        class="list-group-item list-group-item-action {{ Request::is('admin-dashboard/orders') ? 'active' : '' }}">
         Order List
     </a>
     <a href="/admin-dashboard/laptops"

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Laptop;
+use App\Models\SellLaptop;
+use App\Models\Order;
 
 class AdminController extends Controller
 {
@@ -13,7 +16,14 @@ class AdminController extends Controller
     }
     public function dashboard()
     {
-        return view('dashboard.admin.dashboard');
+        return view('dashboard.admin.dashboard',
+            [
+                'laptop' => Laptop::count(),
+                'sell_laptop' => SellLaptop::where('sell_laptop_status', '=', '1')->get()->count(),
+                'price' => Order::where('order_status', 'paid')->sum('total_price'),
+                'shipping_cost' => Order::where('order_status','paid')->sum('shipping_cost'),
+                'expense' => SellLaptop::where('sell_laptop_status', '=', '1')->sum('sell_laptop_price'),
+            ]);    
     }
 
     public function authenticate(Request $request)
