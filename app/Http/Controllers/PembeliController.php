@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BuyerUser;
+use App\Models\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -64,6 +65,32 @@ class PembeliController extends Controller
 
         $request->session()->regenerateToken();
         return redirect()->route('beranda');
+    }
+
+    public function cartadd(Request $request){
+        $validatedData = $request->validate([
+            'buyer_user_id' => 'required',
+            'laptop_id' => 'required',
+            'qty' => 'required|numeric',
+            'notelaptop' => 'max:255',
+        ]);
+
+        $cart = Cart::where('buyer_user_id', $validatedData['buyer_user_id'])->where('laptop_id', $validatedData['laptop_id'])->first();
+
+        if($cart){
+            $cart->cart_amount = $cart->cart_amount + $validatedData['qty'];
+            $cart->cart_note = $validatedData['notelaptop'];
+            $cart->save();
+        }else{
+            Cart::create([
+                'laptop_id' => $validatedData['laptop_id'],
+                'buyer_user_id' => $validatedData['buyer_user_id'],
+                'cart_amount' => $validatedData['qty'],
+                'cart_note' => $validatedData['notelaptop'],
+            ]);
+        }
+
+        return redirect()->route('product',$validatedData['laptop_id'])->with('success', 'Item added to cart');
     }
 
     public function orderindex(){

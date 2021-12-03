@@ -16,7 +16,7 @@ class CreateCartsTable extends Migration
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
             $table->integer('cart_amount');
-            $table->string('cart_note');
+            $table->string('cart_note')->nullable();
             $table->timestamps();
 
             // FK

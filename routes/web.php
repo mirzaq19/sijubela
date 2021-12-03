@@ -52,6 +52,7 @@ Route::get('/product/{laptop}', [FrontController::class, 'show'])->name('product
 Route::group(['middleware' => 'is_buyer'], function () {
     // PEMBELI
     Route::get('/cart', [PembeliController::class, 'cart'])->name('cart');
+    Route::post('/addcart', [PembeliController::class, 'cartadd'])->name('cart.add');
 
     // ORDER
     Route::get('/order', [PembeliController::class, 'orderindex'])->name('buyer-order.index');

@@ -94,36 +94,51 @@
                 {!! nl2br($laptop->laptop_desc) !!}
             </p>
         </div>
-        <div class="belanja">
-            <h3>Belanja Sekarang</h3>
-            <div class="row mt-2 mb-4">
-                <div class="col-md-6">
-                    <form>
-                        <div class="row">
-                            <label for="qty" class="form-label">Jumlah</label>
-                            <div class="col-5">
-                                <div class="input-group mb-3">
-                                    <span title="Kurang" class="input-group-text" id="minusamount"><i
-                                            class="fas fa-minus-circle"></i></span>
-                                    <input type="number" id="qty" name="qty" class="form-control text-center" value="1">
-                                    <span title="Tambah" class="input-group-text" id="plusamount"><i
-                                            class="fas fa-plus-circle"></i></span>
+        @auth('buyer_user')
+            <div class="belanja">
+                <h3>Belanja Sekarang</h3>
+                <div class="row mt-2 mb-4">
+                    <div class="col-md-6">
+                        <form action="{{ route('cart.add') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="buyer_user_id" id="buyer_user_id"
+                                value="{{ Auth::guard('buyer_user')->user()->id }}">
+                            <input type="hidden" name="laptop_id" id="laptop_id" value="{{ $laptop->id }}">
+                            <div class="row">
+                                <label for="qty" class="form-label">Jumlah</label>
+                                <div class="col-5">
+                                    <div class="input-group mb-3">
+                                        <span title="Kurang" class="input-group-text" id="minusamount"><i
+                                                class="fas fa-minus-circle"></i></span>
+                                        <input type="number" id="qty" name="qty" class="form-control text-center" value="1">
+                                        <span title="Tambah" class="input-group-text" id="plusamount"><i
+                                                class="fas fa-plus-circle"></i></span>
+                                    </div>
+                                </div>
+                                <div class="col-7">
+                                    <p class="my-1 h5">dari {{ $laptop->laptop_stock }}</p>
                                 </div>
                             </div>
-                            <div class="col-7">
-                                <p class="my-1 h5">dari {{ $laptop->laptop_stock }}</p>
+                            <div class="mb-3">
+                                <label for="notelaptop" class="form-label">Catatan</label>
+                                <textarea name="notelaptop" class="form-control @error('notelaptop') is-invalid @enderror"
+                                    id="notelaptop" rows="3"></textarea>
+                                @error('notelaptop')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="notelaptop" class="form-label">Catatan</label>
-                            <textarea name="notelaptop" class="form-control" id="notelaptop" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-blue">Masukkan Keranjang</button>
-                    </form>
+                            <button type="submit" class="btn btn-blue">Masukkan Keranjang</button>
+                        </form>
+                    </div>
                 </div>
+                <p class="h4">Harga total: Rp. <span id="totalprice"></span></p>
             </div>
-            <p class="h4">Harga total: Rp. <span id="totalprice"></span></p>
-        </div>
+        @else
+            <div class="alert alert-warning" role="alert">
+                <i class="fas fa-info-circle"></i> Silahkan <a href="{{ route('pembeli-login') }}">login</a> terlebih dahulu
+                untuk memulai transaksi
+            </div>
+        @endauth
     </div>
     <div class="container rounded mb-3 bg-white p-4">
         <h2>Testimonial</h2>
@@ -198,9 +213,9 @@
 @endsection
 
 @section('afterscript')
-    @if (false)
+    @if (session()->has('success'))
         <script>
-            var myModal = new bootstrap.Modal(document.getElementById('modal-success'), {
+            const myModal = new bootstrap.Modal(document.getElementById('modal-success'), {
                 keyboard: false
             });
             myModal.show();
@@ -208,52 +223,54 @@
     @endif
     @if (false)
         <script>
-            var myModal = new bootstrap.Modal(document.getElementById('modal-failed'), {
+            const myModal = new bootstrap.Modal(document.getElementById('modal-failed'), {
                 keyboard: false
             });
             myModal.show();
         </script>
     @endif
-    <script>
-        const price = {{ $laptop->laptop_price }};
-        const stock = {{ $laptop->laptop_stock }};
-        const totalprice = document.getElementById('totalprice');
-        const minusamount = document.getElementById('minusamount');
-        const plusamount = document.getElementById('plusamount');
-        const qty = document.getElementById('qty');
-        const notelaptop = document.getElementById('notelaptop');
+    @auth('buyer_user')
+        <script>
+            const price = {{ $laptop->laptop_price }};
+            const stock = {{ $laptop->laptop_stock }};
+            const totalprice = document.getElementById('totalprice');
+            const minusamount = document.getElementById('minusamount');
+            const plusamount = document.getElementById('plusamount');
+            const qty = document.getElementById('qty');
+            const notelaptop = document.getElementById('notelaptop');
 
-        const calculatePrice = (quantity, priceProduct) => {
-            return (quantity * priceProduct).toLocaleString('id-ID')
-        }
+            const calculatePrice = (quantity, priceProduct) => {
+                return (quantity * priceProduct).toLocaleString('id-ID')
+            }
 
-        const minus = () => {
-            if (qty.value > 1) {
-                qty.value--;
+            const minus = () => {
+                if (qty.value > 1) {
+                    qty.value--;
+                    totalprice.innerHTML = calculatePrice(qty.value, price);
+                }
+            }
+
+            const plus = () => {
+                if (qty.value < stock) {
+                    qty.value++;
+                    totalprice.innerHTML = calculatePrice(qty.value, price);
+                }
+            }
+
+            const checkStock = () => {
+                if (qty.value > stock) {
+                    qty.value = stock;
+                }
                 totalprice.innerHTML = calculatePrice(qty.value, price);
             }
-        }
 
-        const plus = () => {
-            if (qty.value < stock) {
-                qty.value++;
+            minusamount.addEventListener('click', minus);
+            plusamount.addEventListener('click', plus);
+            qty.addEventListener('keyup', checkStock);
+
+            document.addEventListener('DOMContentLoaded', function() {
                 totalprice.innerHTML = calculatePrice(qty.value, price);
-            }
-        }
-
-        const checkStock = () => {
-            if (qty.value > stock) {
-                qty.value = stock;
-            }
-            totalprice.innerHTML = calculatePrice(qty.value, price);
-        }
-
-        minusamount.addEventListener('click', minus);
-        plusamount.addEventListener('click', plus);
-        qty.addEventListener('keyup', checkStock);
-
-        document.addEventListener('DOMContentLoaded', function() {
-            totalprice.innerHTML = calculatePrice(qty.value, price);
-        }, false);
-    </script>
+            }, false);
+        </script>
+    @endauth
 @endsection
