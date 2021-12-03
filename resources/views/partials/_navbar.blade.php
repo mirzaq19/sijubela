@@ -42,9 +42,10 @@
                                     class="mx-2">{{ auth()->guard('buyer_user')->user()->buyer_username }}</span>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="#">Akun Saya</a></li>
+                                <li><a class="dropdown-item" href="{{ route('buyer-account.index') }}">Akun Saya</a></li>
 
-                                <li><a class="dropdown-item" href="#">Pesanan Saya</a></li>
+                                <li><a class="dropdown-item" href="{{ route('buyer-order.index') }}">Pesanan Saya</a>
+                                </li>
 
 
                                 <form action="{{ route('pembeli-logout') }}" method="POST">

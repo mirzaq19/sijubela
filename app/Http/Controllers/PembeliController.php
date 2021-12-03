@@ -88,7 +88,61 @@ class PembeliController extends Controller
         return view('dashboard.pembeli.order');
     }
 
+    public function accountindex()
+    {
+        return redirect()->route('buyer-account.detail');
+    }
     public function accountdetail(){
-        return view('dashboard.pembeli.account');
+        return view('dashboard.pembeli.account',[
+            'pagetitle' => 'Detail',
+            'user' => Auth::guard('buyer_user')->user(),
+        ]);
+    }
+    public function accountdetailupdate(Request $request){
+        if($request->input('buyer_password') != null){
+            $validatedData = $request->validate([
+                'buyer_full_name' => 'required|max:255',
+                'buyer_phone' => 'required|min:8|numeric',
+                'buyer_password' => 'min:6|max:255',
+            ]);
+            $validatedData['buyer_password'] = bcrypt($validatedData['buyer_password']);
+        }else{
+            $validatedData = $request->validate([
+                'buyer_full_name' => 'required|max:255',
+                'buyer_phone' => 'required|min:8|numeric',
+            ]);
+        }
+
+        $userupdate = BuyerUser::find($request->id);
+
+        $userupdate->update($validatedData);
+
+        return redirect()->route('buyer-account.detail')->with('success', 'Detail changes successfully saved!');
+    }
+    public function accountaddress(){
+        return view('dashboard.pembeli.account',[
+            'pagetitle' => 'Alamat',
+            'address' => Auth::guard('buyer_user')->user()->addresses()->first(),
+            'userid' => Auth::guard('buyer_user')->user()->id,
+        ]);
+    }
+    public function accountaddressupdate(Request $request){
+        // dd($request->all());
+        $user = BuyerUser::find($request->id);
+        $validatedData = $request->validate([
+            'full_address' => 'required|max:255',
+            'province' => 'required|max:255',
+            'district' => 'required|max:255',
+            'subdistrict' => 'required|max:255',
+            'village' => 'required|max:255',
+            'postal_code' => 'required|max:5',
+        ]);
+
+        $user->addresses()->updateOrCreate(
+            ['buyer_user_id' => $request->id],
+            $validatedData
+        );
+
+        return redirect()->route('buyer-account.address')->with('success', 'Address changes successfully saved!');
     }
 }

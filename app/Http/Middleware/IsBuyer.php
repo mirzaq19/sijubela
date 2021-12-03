@@ -20,6 +20,9 @@ class IsBuyer
         if(Auth::guard('buyer_user')->check()) {
             return $next($request);
         }
-        return redirect()->back();
+        if(Auth::guest()) {
+            return redirect()->route('pembeli-login');
+        }
+        return redirect()->route('beranda');
     }
 }

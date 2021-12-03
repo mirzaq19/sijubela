@@ -7,7 +7,7 @@
                 <div class="menu-user bg-white p-4 rounded">
                     <h1 class="mb-4"><i class="fs-1 far fa-user-circle"></i> John</h1>
                     <p class="m-0 mb-2">
-                        @if (Request::is('account'))
+                        @if (Request::is('account/*'))
                             <span class="text-blue">
                                 <i class="far fa-address-book"></i> Akun Saya</span>
                         @else

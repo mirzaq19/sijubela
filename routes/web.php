@@ -47,23 +47,28 @@ Route::post('/seller-logout', [PenjualController::class, 'logout'])->name('penju
 Route::post('/admin-login', [AdminController::class, 'authenticate']);
 Route::post('/admin-logout', [AdminController::class, 'logout'])->name('admin-logout');
 
-
-// PEMBELI
 Route::get('/product', [FrontController::class, 'show']);
-Route::get('/cart', [PembeliController::class, 'cart'])->name('cart')->middleware('is_buyer');
 
-// ORDER
-Route::get('/order', [PembeliController::class, 'orderindex'])->name('buyer-order.index');
-Route::get('/order/all', [PembeliController::class, 'orderall'])->name('buyer-order.all');
-Route::get('/order/notpay', [PembeliController::class, 'ordernotpay'])->name('buyer-order.notpay');
-Route::get('/order/packing', [PembeliController::class, 'orderpacking'])->name('buyer-order.packing');
-Route::get('/order/shipping', [PembeliController::class, 'ordershipping'])->name('buyer-order.shipping');
-Route::get('/order/finish', [PembeliController::class, 'orderfinish'])->name('buyer-order.finish');
-Route::get('/order/cancel', [PembeliController::class, 'ordercancel'])->name('buyer-order.cancel');
+Route::group(['middleware' => 'is_buyer'], function () {
+    // PEMBELI
+    Route::get('/cart', [PembeliController::class, 'cart'])->name('cart');
 
-// AKUN PEMBELI
-Route::get('/account', [PembeliController::class, 'accountdetail'])->name('buyer-account.detail');
+    // ORDER
+    Route::get('/order', [PembeliController::class, 'orderindex'])->name('buyer-order.index');
+    Route::get('/order/all', [PembeliController::class, 'orderall'])->name('buyer-order.all');
+    Route::get('/order/notpay', [PembeliController::class, 'ordernotpay'])->name('buyer-order.notpay');
+    Route::get('/order/packing', [PembeliController::class, 'orderpacking'])->name('buyer-order.packing');
+    Route::get('/order/shipping', [PembeliController::class, 'ordershipping'])->name('buyer-order.shipping');
+    Route::get('/order/finish', [PembeliController::class, 'orderfinish'])->name('buyer-order.finish');
+    Route::get('/order/cancel', [PembeliController::class, 'ordercancel'])->name('buyer-order.cancel');
 
+    // AKUN PEMBELI
+    Route::get('/account', [PembeliController::class, 'accountindex'])->name('buyer-account.index');
+    Route::get('/account/detail', [PembeliController::class, 'accountdetail'])->name('buyer-account.detail');
+    Route::post('/account/detail', [PembeliController::class, 'accountdetailupdate'])->name('buyer-account.detailupdate');
+    Route::get('/account/address', [PembeliController::class, 'accountaddress'])->name('buyer-account.address');
+    Route::post('/account/address', [PembeliController::class, 'accountaddressupdate'])->name('buyer-account.addressupdate');
+});
 
 // PENJUAL
 Route::get('/dashboard', [PenjualController::class, 'dashboard'])->name('penjual-dashboard')->middleware('is_seller');
