@@ -15,11 +15,15 @@ class CreateCartsTable extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
+            $table->integer('cart_amount');
+            $table->string('cart_note')->nullable();
             $table->timestamps();
 
             // FK
 
             $table->foreignId('buyer_user_id');
+            $table->foreignId('laptop_id');
+
         });
     }
 

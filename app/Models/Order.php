@@ -16,12 +16,12 @@ class Order extends Model
         return $this->belongsTo(BuyerUser::class);
     }
 
-    public function payment()
+    public function payments()
     {
-        return $this->belongsTo(Payment::class);
+        return $this->hasMany(Payment::class);
     }
 
-    public function order_detail()
+    public function order_details()
     {
         return $this->hasMany(OrderDetail::class);
     }

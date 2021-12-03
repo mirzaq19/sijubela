@@ -22,6 +22,7 @@ class CreateAddressesTable extends Migration
             $table->string('village');
             $table->string('postal_code');
             $table->timestamps();
+            $table->foreignId('buyer_user_id');
         });
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BuyerUser;
+use App\Models\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -66,6 +67,32 @@ class PembeliController extends Controller
         return redirect()->route('beranda');
     }
 
+    public function cartadd(Request $request){
+        $validatedData = $request->validate([
+            'buyer_user_id' => 'required',
+            'laptop_id' => 'required',
+            'qty' => 'required|numeric',
+            'notelaptop' => 'max:255',
+        ]);
+
+        $cart = Cart::where('buyer_user_id', $validatedData['buyer_user_id'])->where('laptop_id', $validatedData['laptop_id'])->first();
+
+        if($cart){
+            $cart->cart_amount = $cart->cart_amount + $validatedData['qty'];
+            $cart->cart_note = $validatedData['notelaptop'];
+            $cart->save();
+        }else{
+            Cart::create([
+                'laptop_id' => $validatedData['laptop_id'],
+                'buyer_user_id' => $validatedData['buyer_user_id'],
+                'cart_amount' => $validatedData['qty'],
+                'cart_note' => $validatedData['notelaptop'],
+            ]);
+        }
+
+        return redirect()->route('product',$validatedData['laptop_id'])->with('success', 'Item added to cart');
+    }
+
     public function orderindex(){
         return redirect()->route('buyer-order.all');
     }
@@ -88,7 +115,61 @@ class PembeliController extends Controller
         return view('dashboard.pembeli.order');
     }
 
+    public function accountindex()
+    {
+        return redirect()->route('buyer-account.detail');
+    }
     public function accountdetail(){
-        return view('dashboard.pembeli.account');
+        return view('dashboard.pembeli.account',[
+            'pagetitle' => 'Detail',
+            'user' => Auth::guard('buyer_user')->user(),
+        ]);
+    }
+    public function accountdetailupdate(Request $request){
+        if($request->input('buyer_password') != null){
+            $validatedData = $request->validate([
+                'buyer_full_name' => 'required|max:255',
+                'buyer_phone' => 'required|min:8|numeric',
+                'buyer_password' => 'min:6|max:255',
+            ]);
+            $validatedData['buyer_password'] = bcrypt($validatedData['buyer_password']);
+        }else{
+            $validatedData = $request->validate([
+                'buyer_full_name' => 'required|max:255',
+                'buyer_phone' => 'required|min:8|numeric',
+            ]);
+        }
+
+        $userupdate = BuyerUser::find($request->id);
+
+        $userupdate->update($validatedData);
+
+        return redirect()->route('buyer-account.detail')->with('success', 'Detail changes successfully saved!');
+    }
+    public function accountaddress(){
+        return view('dashboard.pembeli.account',[
+            'pagetitle' => 'Alamat',
+            'address' => Auth::guard('buyer_user')->user()->addresses()->first(),
+            'userid' => Auth::guard('buyer_user')->user()->id,
+        ]);
+    }
+    public function accountaddressupdate(Request $request){
+        // dd($request->all());
+        $user = BuyerUser::find($request->id);
+        $validatedData = $request->validate([
+            'full_address' => 'required|max:255',
+            'province' => 'required|max:255',
+            'district' => 'required|max:255',
+            'subdistrict' => 'required|max:255',
+            'village' => 'required|max:255',
+            'postal_code' => 'required|max:5',
+        ]);
+
+        $user->addresses()->updateOrCreate(
+            ['buyer_user_id' => $request->id],
+            $validatedData
+        );
+
+        return redirect()->route('buyer-account.address')->with('success', 'Address changes successfully saved!');
     }
 }

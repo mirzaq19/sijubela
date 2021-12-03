@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Cart extends Model
 {
     use HasFactory;
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
     public function buyer_user()
     {
@@ -16,6 +17,6 @@ class Cart extends Model
 
     public function laptop()
     {
-        return $this->belongsToMany(Laptop::class, DetailCart::class);
+        return $this->belongsTo(Laptop::class);
     }
 }

@@ -12,22 +12,22 @@ class BuyerUser extends Authenticatable
 
     protected $guarded = ['id', 'timestamps'];
 
-    public function cart()
+    public function carts()
     {
         return $this->hasMany(Cart::class);
     }
 
     public function addresses()
     {
-        return $this->belongsToMany(Address::class, DetailAddress::class);
+        return $this->hasMany(Address::class);
     }
 
-    public function testimonial()
+    public function testimonials()
     {
         return $this->hasMany(Testimonial::class);
     }
 
-    public function order()
+    public function orders()
     {
         return $this->hasMany(Order::class);
     }

@@ -15,7 +15,7 @@ class CreateLaptopImagesTable extends Migration
     {
         Schema::create('laptop_images', function (Blueprint $table) {
             $table->id();
-            $table->binary('laptop_image');
+            $table->string('laptop_image');
             $table->timestamps();
 
             // FK

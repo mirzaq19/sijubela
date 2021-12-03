@@ -9,11 +9,11 @@ class Laptop extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id', 'timestamps'];
-    
-    public function cart()
+    protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    public function carts()
     {
-        return $this->belongsToMany(Cart::class, DetailCart::class);
+        return $this->hasMany(Cart::class);
     }
 
     public function laptop_image()
@@ -21,12 +21,11 @@ class Laptop extends Model
         return $this->hasMany(LaptopImage::class);
     }
 
-    public function testimonial()
+    public function testimonials()
     {
         return $this->hasMany(Testimonial::class);
     }
-
-    public function order_detail()
+    public function order_details()
     {
         return $this->hasMany(OrderDetail::class);
     }
