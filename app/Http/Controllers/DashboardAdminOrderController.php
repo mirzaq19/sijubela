@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\OrderDetail;
 use Illuminate\Http\Request;
+use App\Models\Order;
+use App\Models\OrderDetail;
+use App\Models\Laptop;
+use App\Models\BuyerUser;
 
 class DashboardAdminOrderController extends Controller
 {
@@ -15,7 +18,11 @@ class DashboardAdminOrderController extends Controller
     public function index()
     {
         return view('dashboard.admin.dashboardorder',[
-            "orders" => OrderDetail::all()
+            "orders" => Order::all(),
+            "buyers" => BuyerUser::all('id','buyer_username'),
+            "laptops" => Laptop::all('id','laptop_name'),
+            "orderdetails" => OrderDetail::all('order_id','laptop_id'),
+
         ]);
     }
 
@@ -43,35 +50,48 @@ class DashboardAdminOrderController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\OrderDetail  $orderDetail
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(OrderDetail $orderDetail)
+    public function show(Order $order)
     {
-        //
+        return view('dashboard.admin.dashboardordershow',[
+            "order" => $order,
+            "buyer" => BuyerUser::find($order->buyer_user_id),
+            "orderdetails" => OrderDetail::where('order_id',$order->id)->get(),
+            "laptops" => Laptop::all('id','laptop_name'),
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\OrderDetail  $orderDetail
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function edit(OrderDetail $orderDetail)
+    public function edit(Order $order)
     {
-        //
+        return view('dashboard.admin.dashboardorderedit',[
+            "order" => $order,
+            "buyer" => BuyerUser::find($order->buyer_user_id),
+            "orderdetails" => OrderDetail::where('order_id',$order->id)->get(),
+            "laptops" => Laptop::all('id','laptop_name'),
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\OrderDetail  $orderDetail
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OrderDetail $orderDetail)
+    public function update(Request $request, Order $order)
     {
-        //
+        $order->shipping_status = $request->shipping_status;
+        $order->save();
+
+        return redirect('/admin-dashboard/orders')->with('success','Shipping status updated successfully');
     }
 
     /**
