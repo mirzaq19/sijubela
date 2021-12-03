@@ -183,6 +183,31 @@
                 </div>
             </div>
         </div>
+        <div class="card mt-4" id="brand">
+            <h2 class="card-header text-center"><strong>Produk</strong></h2>
+            <div class="card-body">
+                <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+                    @foreach ($laptops as $laptop)
+                        <div class="col">
+                            <div class="card h-100">
+                                <img src="{{ asset($laptop->laptop_image()->first()->laptop_image) }}"
+                                    class="card-img-top" alt="Product">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title">{{ $laptop->laptop_name }}</h6>
+                                    <p class="mb-2">Stock: {{ $laptop->laptop_stock }}</p>
+                                    <p class="mb-2">Rp.
+                                        {{ number_format($laptop->laptop_price, 0, ',', '.') }}</p>
+                                    <a class="btn btn-blue" href="#">Lihat produk</a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                @if ($laptops->count() == 0)
+                    <p class="display-6 text-center my-4">Belum ada produk</p>
+                @endif
+            </div>
+        </div>
         <div class="card mt-4">
             <h2 class="card-header text-center"><strong>GPU</strong></h2>
             <div class="card-body">

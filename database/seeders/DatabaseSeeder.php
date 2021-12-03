@@ -100,7 +100,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Laptop::create([
-            'laptop_name' => 'Lenovo V15-G1 15IML |Core i3-10110U|1TB HDD|15,6"| OS DOS - 4GB RAM+1TB HDD',
+            'laptop_name' => 'Lenovo V15-G1 15IML',
             'laptop_brand' => 'Lenovo',
             'laptop_type' => 'V15-G1 15IML',
             'laptop_desc' => 'Highlights :
@@ -143,7 +143,7 @@ class DatabaseSeeder extends Seeder
             'laptop_stock' => 10,
         ]);
         Laptop::create([
-            'laptop_name' => 'LAPTOP GAMING ASUS X413JA CORE I3-1005G1 4GB DUAL SSD 14" FHD WIN 10',
+            'laptop_name' => 'LAPTOP GAMING ASUS X413JA',
             'laptop_brand' => 'Asus',
             'laptop_type' => 'X413JA',
             'laptop_desc' => 'Spesifikasi Lengkap :
@@ -183,7 +183,7 @@ class DatabaseSeeder extends Seeder
             'laptop_stock' => 10,
         ]);
         Laptop::create([
-            'laptop_name' => 'HP PAVILION 14-DV0068TX INTEL i7-1165G7 8GB 512SSD MX450 FHD WIN10+OHS',
+            'laptop_name' => 'HP PAVILION 14-DV0068TX',
             'laptop_brand' => 'HP',
             'laptop_type' => 'PAVILION 14-DV0068TX',
             'laptop_desc' => 'Spesifikasi:
@@ -216,27 +216,27 @@ class DatabaseSeeder extends Seeder
         ]);
 
         LaptopImage::create([
-            'laptop_image' => 'product/p1-1.png',
+            'laptop_image' => 'img/product/p1-1.webp',
             'laptop_id' => 1,
         ]);
         LaptopImage::create([
-            'laptop_image' => 'product/p1-2.webp',
+            'laptop_image' => 'img/product/p1-2.webp',
             'laptop_id' => 1,
         ]);
         LaptopImage::create([
-            'laptop_image' => 'product/p2-1.webp',
+            'laptop_image' => 'img/product/p2-1.webp',
             'laptop_id' => 2,
         ]);
         LaptopImage::create([
-            'laptop_image' => 'product/p2-2.webp',
+            'laptop_image' => 'img/product/p2-2.webp',
             'laptop_id' => 2,
         ]);
         LaptopImage::create([
-            'laptop_image' => 'product/p3-1.webp',
+            'laptop_image' => 'img/product/p3-1.webp',
             'laptop_id' => 3,
         ]);
         LaptopImage::create([
-            'laptop_image' => 'product/p3-2.webp',
+            'laptop_image' => 'img/product/p3-2.webp',
             'laptop_id' => 3,
         ]);
         Cart::create([
@@ -347,6 +347,14 @@ class DatabaseSeeder extends Seeder
             'laptop_weight' => 1.2,
             'laptop_price' => 7500000,
             'laptop_stock' => 50,
+        ]);
+        LaptopImage::create([
+            'laptop_image' => 'img/product/p3-1.webp',
+            'laptop_id' => 4,
+        ]);
+        LaptopImage::create([
+            'laptop_image' => 'img/product/p3-2.webp',
+            'laptop_id' => 5,
         ]);
 
         SellLaptop::create([
