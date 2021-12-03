@@ -9,11 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class PembeliController extends Controller
 {
-    public function cart()
-    {
-        return view('dashboard.pembeli.cart');
-    }
-
     public function login()
     {
         return view('dashboard.pembeli.login');
@@ -67,6 +62,13 @@ class PembeliController extends Controller
         return redirect()->route('beranda');
     }
 
+    public function cart()
+    {
+        return view('dashboard.pembeli.cart',[
+            'carts' => Cart::where('buyer_user_id', Auth::guard('buyer_user')->user()->id)->get(),
+        ]);
+    }
+
     public function cartadd(Request $request){
         $validatedData = $request->validate([
             'buyer_user_id' => 'required',
@@ -91,6 +93,11 @@ class PembeliController extends Controller
         }
 
         return redirect()->route('product',$validatedData['laptop_id'])->with('success', 'Item added to cart');
+    }
+
+    public function cartdelete(Cart $cart){
+        $cart->delete();
+        return redirect()->route('cart')->with('success', 'Item deleted from cart');
     }
 
     public function orderindex(){
