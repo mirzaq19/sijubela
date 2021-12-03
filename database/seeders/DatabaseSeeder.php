@@ -5,7 +5,15 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\AdminUser;
 use App\Models\BuyerUser;
+use App\Models\Address;
 use App\Models\SellerUser;
+use App\Models\Laptop;
+use App\Models\LaptopImage;
+use App\Models\Cart;
+use App\Models\Order;
+use App\Models\OrderDetail;
+use App\Models\Payment;
+use App\Models\Testimonial;
 
 class DatabaseSeeder extends Seeder
 {
@@ -32,6 +40,15 @@ class DatabaseSeeder extends Seeder
             'buyer_email' => 'mirzaq@gmail.com',
             'buyer_password' => bcrypt('mirzaq123'),
             'buyer_phone' => '081291029102',
+        ]);
+        Address::create([
+            'full_address' => 'Jl. Bola Volly A.20, Japan Raya, Sooko, Mojokerto',
+            'province' => 'Jawa Timur',
+            'district' => 'Mojokerto',
+            'subdistrict' => 'Sooko',
+            'village' => 'Japan',
+            'postal_code' => '61361',
+            'buyer_user_id' => '2',
         ]);
 
         BuyerUser::create([
@@ -80,5 +97,234 @@ class DatabaseSeeder extends Seeder
             'admin_username' => 'yusrilz-admin',
             'admin_password' => bcrypt('yusril123'),
         ]);
+
+        Laptop::create([
+            'laptop_name' => 'Lenovo V15-G1 15IML |Core i3-10110U|1TB HDD|15,6"| OS DOS - 4GB RAM+1TB HDD',
+            'laptop_brand' => 'Lenovo',
+            'laptop_type' => 'V15-G1 15IML',
+            'laptop_desc' => 'Highlights :
+            • Ada slot SSD M.2 yang bisa request pasang.
+            • Storage yang bisa diupgrade untuk penyimpanan lebih besar dan performa yang lebih tinggi.
+            
+            BARANG ORI 100% - NEW
+            - Stock Ready Bisa Di Order
+            - Bonus Tas
+            - Bonus Instal Os Trial ( Wajib Chat Penjual Dulu )
+            - Garansi Distributor 1 Tahun
+            
+            ADA 4 VARIAN :
+            -4GB RAM+1TB HDD
+            -8GB RAM+1TB HDD
+            -12GB RAM + 1TB HDD
+            -4GB RAM+1TB HDD+256 SSD M.2
+            -8GB RAM+1TB HDD+256 SSD M.2
+            
+            SPEK :
+            Notebook : Lenovo V15-G1 15IML
+            Processor : Intel® Core™ i3-10110U CPU @ 2.10 Ghz ( 2 Cores 4 Threads )
+            RAM : 1X4096 MB DDR4 (4 GB DDR4-21300) OnBoard + 1 Slot Memori Kosong
+            Harddisk : 1000 GB HDD + 1 SLOT SSD M.2 (22mm x 80mm) NVME
+            Kamera : VGA Web Camera
+            VGA : Intel® UHD Graphics, Dedicated 128 MB, Shared 3983 MB, Up to 4111 MB
+            Baterai : 2 Cell Li-ion 4610mAh
+            Fitur : BT, WiFi, Card Reader,1 Port USB 2.0,2 Port USB 3.0, HDMI
+            Layar : 15,6 HD TN (1366 X 768)
+            Berat Barang : 1.7 Kg
+            Berat Kemasan : 2.5 Kg
+            Ukuran Barang : 36.2 x 25 x 1.8 cm
+            Ukuran Kemasan : 53 x 33 x 7 cm
+            Warna : Iron grey
+            Operation System (OS) : No OS
+            Garansi : 1 Tahun',
+            'laptop_condition' => '1',
+            'laptop_weight' => '2300',
+            'laptop_price' => '6910995',
+            'laptop_stock' => '10',
+        ]);
+        Laptop::create([
+            'laptop_name' => 'LAPTOP GAMING ASUS X413JA CORE I3-1005G1 4GB DUAL SSD 14" FHD WIN 10',
+            'laptop_brand' => 'Asus',
+            'laptop_type' => 'X413JA',
+            'laptop_desc' => 'Spesifikasi Lengkap :
+
+                Asus X413JA-211
+                Operation System : Windows 10 Home In S mode 64-Bit
+                Processor : Intel Core i3-1005G1 @ 1.20 Ghz
+                RAM : 4GB DDR4
+                Internal : 128 GB M.2 NMVE + SSD 256GB NVME
+                
+                Layar : 14" FULL HD RESOLUSI (1920X1080)
+                VGA : Intel® UHD Graphics Dedicated 128 MB
+                Baterai : Cell LI-ion 19V (3550 mAh)
+                Warna : Dreamy White
+                
+                FITUR :
+                - Micro SD
+                - WIFI
+                - Bluetooth
+                - Webcam
+                - CardReader
+                - 2 port USB 2.0
+                - 1 port USB 3.0
+                - 1 Port USB 3.1 type C
+                - Port HDMI
+                
+                Kelengkapan :
+                * Dus Ori lengkap
+                * Manual Book
+                * Kartu Garansi
+                * Adaptor+Charger
+                
+                Garansi : 1 Tahun ( FULL SERVICE + SPAREPART )',
+            'laptop_condition' => '1',
+            'laptop_weight' => '2300',
+            'laptop_price' => '7623000',
+            'laptop_stock' => '10',
+        ]);
+        Laptop::create([
+            'laptop_name' => 'HP PAVILION 14-DV0068TX INTEL i7-1165G7 8GB 512SSD MX450 FHD WIN10+OHS',
+            'laptop_brand' => 'HP',
+            'laptop_type' => 'PAVILION 14-DV0068TX',
+            'laptop_desc' => 'Spesifikasi:
+
+                - Processor Onboard : Intel Core™ i7-1165G7 (12M Cache, up to 4.70 GHz)
+                - Memori Standar : 8 GB DDR4-3200 SDRAM
+                - SSD : 512GB PCIe® NVMe™
+                - Tipe Grafis : Intel® iRis XE & NVIDIA GEFORCE MX450 (2 GB GDDR5 dedicated)
+                - Display : 14" FHD IPS BrightView micro-edge WLED-backlit (1920 x 1080)
+                - Audio : Dual speakers
+                - Keyboard : Full-size island-style natural silver backlit keyboard
+                - Webcam : HP TrueVision HD Camera with integrated digital microphone
+                - Wireless Network : Realtek 802.11 a/b/g/n/ac (1x1) Wi-Fi® and Bluetooth® 4.2 Combo
+                - Interfaces
+                1x USB 3.1 Gen 1 Type-C™ (Data transfer only, data 5 Gb/s signaling rate)
+                2x USB 3.1 Gen 1 (Data transfer only)
+                1x HDMI 1.4b
+                1x RJ-45
+                1x headphone/microphone combo
+                
+                - Sistem Operasi : Windows 10 Home + Microsoft Office Home & Student 2019 ORIGINAL PERMANEN
+                - Baterai : 3-cell, 41 Wh Li-ion
+                - Dimensi : 32.4 x 22.59 x 1.99 cm
+                - Weight : 1,43Kg
+                - Color : Silver, Gold',
+            'laptop_condition' => '1',
+            'laptop_weight' => '2300',
+            'laptop_price' => '15492500',
+            'laptop_stock' => '10',
+        ]);
+
+        LaptopImage::create([
+            'laptop_image' => 'product/p1-1.png',
+            'laptop_id' => '1',
+        ]);
+        LaptopImage::create([
+            'laptop_image' => 'product/p1-2.webp',
+            'laptop_id' => '1',
+        ]);
+        LaptopImage::create([
+            'laptop_image' => 'product/p2-1.webp',
+            'laptop_id' => '2',
+        ]);
+        LaptopImage::create([
+            'laptop_image' => 'product/p2-2.webp',
+            'laptop_id' => '2',
+        ]);
+        LaptopImage::create([
+            'laptop_image' => 'product/p3-1.webp',
+            'laptop_id' => '3',
+        ]);
+        LaptopImage::create([
+            'laptop_image' => 'product/p3-2.webp',
+            'laptop_id' => '3',
+        ]);
+        Cart::create([
+            'cart_amount' => '1',
+            'cart_note' => 'Segera dikirim ya',
+            'laptop_id' => '1',
+            'buyer_user_id' => '2',
+        ]);
+        Cart::create([
+            'cart_amount' => '1',
+            'cart_note' => 'Segera dikirim ya',
+            'laptop_id' => '2',
+            'buyer_user_id' => '2',
+        ]);
+        Order::create([
+            'order_status' => 'belum_bayar',
+            'shipping_status' => 'belum_dikirim',
+            'shipping_address' => 'Jl. Bola Volly A.20, Japan Raya, Sooko, Mojokerto',
+            'shipping_number' => '',
+            'shipping_cost' => '20000',
+            'total_price' => '6910995',
+            'buyer_user_id' => '2',
+        ]);
+        OrderDetail::create([
+            'order_detail_amount' => '1',
+            'order_detail_note' => 'Segera dikirim ya',
+            'price_subtotal' => '6910995',
+            'weight_subtotal' => '2300',
+            'order_id' => '1',
+            'laptop_id' => '1',
+        ]);
+        Order::create([
+            'order_status' => 'dikirim',
+            'shipping_status' => 'Paket berada di warehouse sidoarjo',
+            'shipping_address' => 'Jl. Bola Volly A.20, Japan Raya, Sooko, Mojokerto',
+            'shipping_number' => 'JNE-123456789',
+            'shipping_cost' => '20000',
+            'total_price' => '7623000',
+            'buyer_user_id' => '2',
+        ]);
+        OrderDetail::create([
+            'order_detail_amount' => '1',
+            'order_detail_note' => 'Segera dikirim ya',
+            'price_subtotal' => '7623000',
+            'weight_subtotal' => '2300',
+            'order_id' => '2',
+            'laptop_id' => '2',
+        ]);
+        Payment::create([
+            'payment_image' => 'payment/r1.jpg',
+            'payment_status' => 'menunggu_konfirmasi',
+            'payment_bank_name' => 'bni',
+            'payment_account_name' => 'Mirzaq',
+            'payment_account_number' => '123456789',
+            'order_id' => '2',
+        ]);
+        Order::create([
+            'order_status' => 'selesai',
+            'shipping_status' => 'Paket sudah sampai',
+            'shipping_address' => 'Jl. Bola Volly A.20, Japan Raya, Sooko, Mojokerto',
+            'shipping_number' => 'JNE-123456789',
+            'shipping_cost' => '20000',
+            'total_price' => '15492500',
+            'buyer_user_id' => '2',
+        ]);
+        OrderDetail::create([
+            'order_detail_amount' => '1',
+            'order_detail_note' => 'Segera dikirim ya',
+            'price_subtotal' => '15492500',
+            'weight_subtotal' => '2300',
+            'order_id' => '3',
+            'laptop_id' => '3',
+        ]);
+        Payment::create([
+            'payment_image' => 'payment/r1.jpg',
+            'payment_status' => 'terkonfirmasi',
+            'payment_bank_name' => 'bni',
+            'payment_account_name' => 'Mirzaq',
+            'payment_account_number' => '123456789',
+            'order_id' => '3',
+        ]);
+
+        Testimonial::create([
+            'rating' => '5',
+            'testimonial_desc' => 'Alhamdullilah, laptop sudah sampai dengan selamat, barangnya bagus dan bisa digunakan',
+            'buyer_user_id' => '2',
+            'order_detail_id' => '3',
+            'laptop_id' => '3',
+        ]);
+
     }
 }

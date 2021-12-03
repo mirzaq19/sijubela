@@ -11,8 +11,8 @@ class Address extends Model
 
     protected $guarded = ['id', 'timestamps'];
 
-    public function buyer_users()
+    public function buyer_user()
     {
-        return $this->belongsToMany(BuyerUser::class, DetailAddress::class);
+        return $this->belongsTo(BuyerUser::class);
     }
 }

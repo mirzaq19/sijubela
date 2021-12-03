@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class OrderDetail extends Model
 {
     use HasFactory;
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
     public function order()
     {
@@ -17,5 +18,10 @@ class OrderDetail extends Model
     public function laptop()
     {
         return $this->belongsTo(Laptop::class);
+    }
+
+    public function testimonial()
+    {
+        return $this->hasOne(Testimonial::class);
     }
 }

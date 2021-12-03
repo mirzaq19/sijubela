@@ -21,6 +21,7 @@ class CreateTestimonialsTable extends Migration
 
             // FK
             $table->foreignId('buyer_user_id');
+            $table->foreignId('order_detail_id');
             $table->foreignId('laptop_id');
         });
     }
