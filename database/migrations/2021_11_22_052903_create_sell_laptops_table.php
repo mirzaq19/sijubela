@@ -22,7 +22,8 @@ class CreateSellLaptopsTable extends Migration
             $table->boolean('sell_laptop_condition');
             $table->integer('sell_laptop_usage_time');
             $table->integer('sell_laptop_price');
-            $table->boolean('sell_laptop_negotiable');
+            $table->float('sell_laptop_weight');
+            $table->integer('sell_laptop_status')->default(0);
             $table->timestamps();
 
             // FK
