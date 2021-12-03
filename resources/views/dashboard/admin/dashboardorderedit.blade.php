@@ -30,45 +30,48 @@
             <div class="row g-3 pb-3">
 
                 @foreach ($orderdetails as $orderdetail)
-                    @if ($orderdetails->count() > 1)
-                        <p class="h4">Order {{ $loop->iteration }}</p>
+                    @if ($laptops->id->exists())
+                        @if ($orderdetails->count() > 1)
+                            <p class="h4">Order {{ $loop->iteration }}</p>
+                        @endif
+
+
+                        <div class="col-md-6">
+                            <label for="laptop_name" class="form-label">Laptop Name</label>
+
+                            <input type="text" class="form-control" id="laptop_name"
+                                placeholder="{{ $laptops->where('id', '==', $orderdetail->laptop_id)->pluck('laptop_name')->first() }}"
+                                disabled readonly>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="order_detail_amount" class="form-label">Amount</label>
+
+                            <input type="text" class="form-control" id="order_detail_amount"
+                                placeholder="{{ $orderdetail->order_detail_amount }}" disabled readonly>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="price_subtotal" class="form-label">Price (Rp)</label>
+
+                            <input type="text" class="form-control" id="price_subtotal"
+                                placeholder="{{ number_format($orderdetail->price_subtotal, 0, ',', '.') }}" disabled
+                                readonly>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="weight_subtotal" class="form-label">Weight (Kg)</label>
+
+                            <input type="text" class="form-control" id="weight_subtotal"
+                                placeholder="{{ $orderdetail->weight_subtotal }}" disabled readonly>
+                        </div>
+
+                        <div class="col-12 mb-2">
+                            <label for="order_detail_note" class="form-label">Note</label>
+                            <textarea type="text" class="form-control" id="order_detail_note"
+                                placeholder="{{ $orderdetail->order_detail_note }}" rows="3" disabled readonly></textarea>
+                        </div>
                     @endif
-
-                    <div class="col-md-6">
-                        <label for="laptop_name" class="form-label">Laptop Name</label>
-
-                        <input type="text" class="form-control" id="laptop_name"
-                            placeholder="{{ $laptops->where('id', '==', $orderdetail->laptop_id)->pluck('laptop_name')->first() }}"
-                            disabled readonly>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label for="order_detail_amount" class="form-label">Amount</label>
-
-                        <input type="text" class="form-control" id="order_detail_amount"
-                            placeholder="{{ $orderdetail->order_detail_amount }}" disabled readonly>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label for="price_subtotal" class="form-label">Price (Rp)</label>
-
-                        <input type="text" class="form-control" id="price_subtotal"
-                            placeholder="{{ number_format($orderdetail->price_subtotal, 0, ',', '.') }}" disabled
-                            readonly>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label for="weight_subtotal" class="form-label">Weight (Kg)</label>
-
-                        <input type="text" class="form-control" id="weight_subtotal"
-                            placeholder="{{ $orderdetail->weight_subtotal }}" disabled readonly>
-                    </div>
-
-                    <div class="col-12 mb-2">
-                        <label for="order_detail_note" class="form-label">Note</label>
-                        <textarea type="text" class="form-control" id="order_detail_note"
-                            placeholder="{{ $orderdetail->order_detail_note }}" rows="3" disabled readonly></textarea>
-                    </div>
 
                 @endforeach
 
@@ -84,23 +87,9 @@
                 <div class="col-md-6">
                     <label for="shipping_status" class="form-label">Shipping Status</label>
 
-                    <select class="form-select" name="shipping_status" id="shipping_status">
-                        <option value="{{ $order->shipping_status }}" selected>
-                            {{ Str::ucfirst($order->shipping_status) }}
-                        </option>
-                        @if ($order->shipping_status != 'not yet shipped')
-                            <option value="not yet shipped">Not yet shipped</option>
-                        @endif
-                        @if ($order->shipping_status != 'on process')
-                            <option value="on process">On Process</option>
-                        @endif
-                        @if ($order->shipping_status != 'shipping')
-                            <option value="shipping">Shipping</option>
-                        @endif
-                        @if ($order->shipping_status != 'shipped')
-                            <option value="shipped">Shipped</option>
-                        @endif
-                    </select>
+                    <input type="text" name="shipping_status" class="form-control" id="order_shipping_status"
+                        value="{{ Str::ucfirst($order->shipping_status) }}">
+
                 </div>
 
                 <div class="col-md-6">
