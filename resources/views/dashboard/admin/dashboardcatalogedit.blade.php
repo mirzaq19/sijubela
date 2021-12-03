@@ -130,12 +130,13 @@
 
                     <select class="form-select @error('laptop_condition') is-invalid @enderror" name="laptop_condition"
                         id="laptop_condition" required>
-                        <option value="{{ $laptop->laptop_condition }}" selected> {{ $laptop->laptop_condition }}
+                        <option value="{{ $laptop->laptop_condition }}" selected>
+                            {{ $laptop->laptop_condition ? 'New' : 'Old' }}
                         </option>
-                        @if ($laptop->laptop_condition != 'New')
-                            <option value="New">New</option>
+                        @if ($laptop->laptop_condition != '1')
+                            <option value="1">New</option>
                         @else
-                            <option value="New">Old</option>
+                            <option value="0">Old</option>
                         @endif
                     </select>
 
