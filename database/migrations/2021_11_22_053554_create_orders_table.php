@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->string('order_status');
             $table->string('shipping_address');
             $table->string('shipping_status');
-            $table->string('shipping_number')->default('not_yet');
+            $table->string('shipping_number');
             $table->integer('shipping_cost');
             $table->integer('total_price');
             $table->timestamps();

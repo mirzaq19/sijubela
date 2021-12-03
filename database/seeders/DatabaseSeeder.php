@@ -180,7 +180,7 @@ class DatabaseSeeder extends Seeder
             'laptop_condition' => 1,
             'laptop_weight' => 2.3,
             'laptop_price' => 7623000,
-            'laptop_stock' => '10',
+            'laptop_stock' => 10,
         ]);
         Laptop::create([
             'laptop_name' => 'HP PAVILION 14-DV0068TX INTEL i7-1165G7 8GB 512SSD MX450 FHD WIN10+OHS',
@@ -252,10 +252,10 @@ class DatabaseSeeder extends Seeder
             'buyer_user_id' => 2,
         ]);
         Order::create([
-            'order_status' => 'belum_bayar',
-            'shipping_status' => 'belum_dikirim',
+            'order_status' => 'not_paid',
+            'shipping_status' => 'Belum dikirim',
             'shipping_address' => 'Jl. Bola Volly A.20, Japan Raya, Sooko, Mojokerto',
-            'shipping_number' => '',
+            'shipping_number' => 'not_shipped',
             'shipping_cost' => 20000,
             'total_price' => 6910995,
             'buyer_user_id' => 2,
@@ -269,7 +269,7 @@ class DatabaseSeeder extends Seeder
             'laptop_id' => 1,
         ]);
         Order::create([
-            'order_status' => 'dikirim',
+            'order_status' => 'shipping',
             'shipping_status' => 'Paket berada di warehouse sidoarjo',
             'shipping_address' => 'Jl. Bola Volly A.20, Japan Raya, Sooko, Mojokerto',
             'shipping_number' => 'JNE-123456789',
@@ -287,14 +287,14 @@ class DatabaseSeeder extends Seeder
         ]);
         Payment::create([
             'payment_image' => 'payment/r1.jpg',
-            'payment_status' => 'menunggu_konfirmasi',
+            'payment_status' => 'wait_confirmation',
             'payment_bank_name' => 'bni',
             'payment_account_name' => 'Mirzaq',
             'payment_account_number' => '123456789',
             'order_id' => 2,
         ]);
         Order::create([
-            'order_status' => 'selesai',
+            'order_status' => 'finished',
             'shipping_status' => 'Paket sudah sampai',
             'shipping_address' => 'Jl. Bola Volly A.20, Japan Raya, Sooko, Mojokerto',
             'shipping_number' => 'JNE-123456789',
@@ -311,8 +311,8 @@ class DatabaseSeeder extends Seeder
             'laptop_id' => 3,
         ]);
         Payment::create([
-            'payment_image' => 'payment/r1.jpg',
-            'payment_status' => 'terkonfirmasi',
+            'payment_image' => 'payment/r2.jpg',
+            'payment_status' => 'confirmed',
             'payment_bank_name' => 'bni',
             'payment_account_name' => 'Mirzaq',
             'payment_account_number' => '123456789',
@@ -375,10 +375,10 @@ class DatabaseSeeder extends Seeder
 
         Order::create([
             'buyer_user_id' => 1,
-            'order_status' => 'not_yet_paid',
+            'order_status' => 'not_paid',
             'shipping_address' => 'Jl. Bola Volly A.20, Japan Raya, Sooko, Mojokerto',
-            'shipping_status' => 'not_yet_shipped',
-            'shipping_number' => '',
+            'shipping_status' => 'Belum dikirim',
+            'shipping_number' => 'not_shipped',
             'shipping_cost' => 50000,
             'total_price' => 55050000,
         ]);
