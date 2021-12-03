@@ -24,5 +24,10 @@ class Laptop extends Model
     public function testimonial()
     {
         return $this->hasMany(Testimonial::class);
-    } 
+    }
+
+    public function order_detail()
+    {
+        return $this->hasMany(OrderDetail::class);
+    }
 }
