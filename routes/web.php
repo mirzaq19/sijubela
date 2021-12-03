@@ -47,7 +47,7 @@ Route::post('/seller-logout', [PenjualController::class, 'logout'])->name('penju
 Route::post('/admin-login', [AdminController::class, 'authenticate']);
 Route::post('/admin-logout', [AdminController::class, 'logout'])->name('admin-logout');
 
-Route::get('/product', [FrontController::class, 'show']);
+Route::get('/product/{laptop}', [FrontController::class, 'show'])->name('product');
 
 Route::group(['middleware' => 'is_buyer'], function () {
     // PEMBELI

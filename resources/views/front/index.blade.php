@@ -197,7 +197,7 @@
                                     <p class="mb-2">Stock: {{ $laptop->laptop_stock }}</p>
                                     <p class="mb-2">Rp.
                                         {{ number_format($laptop->laptop_price, 0, ',', '.') }}</p>
-                                    <a class="btn btn-blue" href="#">Lihat produk</a>
+                                    <a class="btn btn-blue" href="{{ route('product', $laptop) }}">Lihat produk</a>
                                 </div>
                             </div>
                         </div>

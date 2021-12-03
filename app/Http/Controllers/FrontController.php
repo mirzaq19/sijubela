@@ -14,8 +14,10 @@ class FrontController extends Controller
         ]);
     }
 
-    public function show()
+    public function show(Laptop $laptop)
     {
-        return view('front.product');
+        return view('front.product',[
+            'laptop' => $laptop,
+        ]);
     }
 }
