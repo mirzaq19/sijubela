@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'Detail {{ $laptop->laptop_name }}')
+@section('title', 'Detail Offer')
 
 @section('aftercss')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
@@ -24,15 +24,11 @@
             <div class="p-2"></div>
             <div class="p-2">
 
-                <a href="#" class="btn btn-danger">Reject</a>
-                <form action="#" method="POST" class="d-inline">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-success">Accept</button>
-                </form>
+                <a href="/admin-dashboard/sell_laptops/{{ $sell_laptop->id }}/edit" class="btn btn-primary">Change
+                    Status</a>
             </div>
         </div>
-        <p class="h2">Offer Detail</p>
+        <p class="h2">Offer Detail from {{ $sell_laptop->seller_user->seller_full_name }}</p>
         <div class="row g-3 pb-3">
             <div class="col-12">
                 <label for="sell_laptop_name" class="form-label">Name</label>
@@ -65,11 +61,11 @@
             </div>
 
             <div class="col-md-6">
-                <label for="sell_laptop_negotiable" class="form-label">Negotiable</label>
+                <label for="sell_laptop_weight" class="form-label">Weight (kg)</label>
 
-                <input type="text" class="form-control" id="sell_laptop_negotiable"
-                    placeholder="{{ $sell_laptop->sell_laptop_negotiable ? 'Yes' : 'No' }}"
-                    aria-label="Disabled input example" disabled readonly>
+                <input type="text" class="form-control" id="sell_laptop_weight"
+                    placeholder="{{ $sell_laptop->sell_laptop_weight }}" aria-label="Disabled input example" disabled
+                    readonly>
             </div>
 
             <div class="col-md-6">

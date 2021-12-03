@@ -116,7 +116,7 @@ class DatabaseSeeder extends Seeder
             'sell_laptop_condition' => 0,
             'sell_laptop_usage_time' => 10,
             'sell_laptop_price' => 15500000,
-            'sell_laptop_negotiable' => 1,
+            'sell_laptop_weight' => 2.1,
         ]);
 
         SellLaptop::create([
@@ -128,7 +128,7 @@ class DatabaseSeeder extends Seeder
             'sell_laptop_condition' => 1,
             'sell_laptop_usage_time' => 0,
             'sell_laptop_price' => 17500000,
-            'sell_laptop_negotiable' => 0,
+            'sell_laptop_weight' => 1.7,
         ]);
 
         Order::create([

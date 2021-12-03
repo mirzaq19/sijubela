@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SellLaptop;
+use App\Models\Laptop;
 use Illuminate\Http\Request;
 
 class DashboardAdminOfferController extends Controller
@@ -15,7 +16,9 @@ class DashboardAdminOfferController extends Controller
     public function index()
     {
         return view('dashboard.admin.dashboardoffer',[
-            "offers" => SellLaptop::where('sell_laptop_status', '=', '0')->get()
+            "offers" => SellLaptop::where('sell_laptop_status', '=', '0')->get(),
+            "offers_accepted" => SellLaptop::where('sell_laptop_status', '=', '1')->get(),
+            "offers_rejected" => SellLaptop::where('sell_laptop_status', '=', '2')->get(),
         ]);
     }
 
@@ -61,7 +64,9 @@ class DashboardAdminOfferController extends Controller
      */
     public function edit(SellLaptop $sellLaptop)
     {
-        //
+        return view('dashboard.admin.dashboardofferedit',[
+            "sell_laptop" => $sellLaptop
+        ]);
     }
 
     /**
@@ -72,16 +77,11 @@ class DashboardAdminOfferController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, SellLaptop $sellLaptop)
-    {
-        $validatedData = $request->validate([
-            'status' => 'required|in:0,1,2',
-        ]);
+    {   
+        $sellLaptop->sell_laptop_status = $request->sell_laptop_status;
+        $sellLaptop->save();
 
-        $validatedData['status'] = 2;
-
-        SellLaptop::where('id',$sellLaptop->id)->update($validatedData);
-
-        return redirect('/admin-dashboard/offer')->with('success','Offer status updated successfully');
+        return redirect('/admin-dashboard/sell_laptops')->with('success','Offer status updated successfully');
     }
 
     /**
