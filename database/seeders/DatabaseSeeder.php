@@ -137,7 +137,16 @@ class DatabaseSeeder extends Seeder
             'order_status' => 'not yet paid',
             'shipping_status' => 'not yet shipped',
             'shipping_cost' => 50000,
-            'total_price' => 55050000,
+            'total_price' => 13050000,
+        ]);
+
+        Order::create([
+            'buyer_user_id' => 2,
+            'payment_id' => 0,
+            'order_status' => 'paid',
+            'shipping_status' => 'on process',
+            'shipping_cost' => 40000,
+            'total_price' => 15040000,
         ]);
 
         OrderDetail::create([
@@ -147,6 +156,24 @@ class DatabaseSeeder extends Seeder
             'order_detail_note' => 'lorem ipsum',
             'price_subtotal' => 5500000,
             'weight_subtotal' => 2.0,
+        ]);
+
+        OrderDetail::create([
+            'order_id' => 1,
+            'laptop_id' => 2,
+            'order_detail_amount' => 1,
+            'order_detail_note' => 'lorem ipsum',
+            'price_subtotal' => 7500000,
+            'weight_subtotal' => 1.2,
+        ]);
+
+        OrderDetail::create([
+            'order_id' => 2,
+            'laptop_id' => 2,
+            'order_detail_amount' => 2,
+            'order_detail_note' => 'lorem ipsum',
+            'price_subtotal' => 15000000,
+            'weight_subtotal' => 2.4,
         ]);
     }
 }
