@@ -393,9 +393,10 @@ class DatabaseSeeder extends Seeder
 
         Order::create([
             'buyer_user_id' => 2,
-            'payment_id' => 0,
             'order_status' => 'paid',
+            'shipping_address' => 'Jl. Bola Volly A.20, Japan Raya, Sooko, Mojokerto',
             'shipping_status' => 'on process',
+            'shipping_number' => 'not_shipped',
             'shipping_cost' => 40000,
             'total_price' => 15040000,
         ]);

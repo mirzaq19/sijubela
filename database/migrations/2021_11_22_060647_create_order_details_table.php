@@ -16,7 +16,7 @@ class CreateOrderDetailsTable extends Migration
         Schema::create('order_details', function (Blueprint $table) {
             $table->id();
             $table->integer('order_detail_amount');
-            $table->string('order_detail_note');
+            $table->string('order_detail_note')->nullable();
             $table->integer('price_subtotal');
             $table->float('weight_subtotal');
             $table->timestamps();

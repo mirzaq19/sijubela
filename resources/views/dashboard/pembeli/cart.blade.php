@@ -32,7 +32,7 @@
         </div>
         <div class="list-group">
             @foreach ($carts as $cart)
-                <li class="list-group-item d-flex align-items-center">
+                <li class="list-group-item d-flex align-items-center" data-idcart="{{ $cart->id }}">
                     <input class="form-check-input product-check" type="checkbox">
                     <div class="row ms-4">
                         <div class="col-sm-3 d-flex justify-content-start justify-content-sm-between align-items-center">
@@ -64,7 +64,9 @@
                 <a href="{{ route('beranda') }}" class="btn btn-secondary btn-block">Lanjutkan Belanja</a>
             </div>
             <div class="col-auto">
-                <form>
+                <form action="{{ route('checkout') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="idcarts" id="idcarts">
                     <button type="submit" class="btn btn-blue btn-block disabled" id="checkout">Checkout</button>
                 </form>
             </div>
@@ -76,24 +78,47 @@
     <script>
         const pilihsemua = document.getElementById('pilihsemua');
         const productCheck = document.querySelectorAll('.product-check');
+        const idcarts = document.getElementById('idcarts');
         const checkout = document.getElementById('checkout');
+
+        const addIdCart = (idcart) => {
+            idcarts.value = idcarts.value.replace(idcart + ',', '');
+            idcarts.value += idcart + ',';
+        }
+        const removeIdCart = (idcart) => {
+            idcarts.value = idcarts.value.replace(idcart + ',', '');
+        }
 
         pilihsemua.addEventListener('click', function() {
             if (pilihsemua.checked) {
                 productCheck.forEach(function(productCheck) {
                     productCheck.checked = true;
                 })
+
+                productCheck.forEach(function(productCheck) {
+                    addIdCart(productCheck.parentElement.dataset.idcart);
+                })
                 checkout.classList.remove('disabled');
             } else {
                 productCheck.forEach(function(productCheck) {
                     productCheck.checked = false;
+                })
+
+                productCheck.forEach(function(productCheck) {
+                    removeIdCart(productCheck.parentElement.dataset.idcart);
                 })
                 checkout.classList.add('disabled');
             }
         })
 
         productCheck.forEach(function(pc) {
-            pc.addEventListener('click', function() {
+            pc.addEventListener('click', function(e) {
+                // console.log(pc.parentElement.dataset.idcart);
+                if (pc.checked) {
+                    addIdCart(pc.parentElement.dataset.idcart);
+                } else {
+                    removeIdCart(pc.parentElement.dataset.idcart);
+                }
                 let checked = 0;
                 productCheck.forEach(function(productCheck) {
                     if (productCheck.checked) {

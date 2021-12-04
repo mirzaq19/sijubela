@@ -24,6 +24,12 @@
 @endsection
 
 @section('buyer-content')
+    @if (session()->has('orderaddsuccess'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('orderaddsuccess') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <div class="order-nav rounded bg-white py-2 mt-3 m-md-0">
         <nav class="nav nav-fill">
             @if (Request::is('order/all'))

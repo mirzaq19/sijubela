@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\BuyerUser;
 use App\Models\Cart;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -98,6 +100,61 @@ class PembeliController extends Controller
     public function cartdelete(Cart $cart){
         $cart->delete();
         return redirect()->route('cart')->with('success', 'Item deleted from cart');
+    }
+
+    public function checkout(Request $request){
+        $idcarts = explode(',',$request->idcarts);
+        $carts = Cart::whereIn('id',$idcarts)->get();
+        $total = 0;
+        $cost = 0;
+        foreach($carts as $cart){
+            $total = $total + ($cart->cart_amount * $cart->laptop->laptop_price);
+            $cost = $cost + ($cart->cart_amount * $cart->laptop->laptop_weight*10000);
+        }
+        return view('dashboard.pembeli.checkout',[
+            'idcarts' => $request->idcarts,
+            'carts' => $carts,
+            'cost' => $cost,
+            'total' => $total,
+            'address' =>Auth::guard('buyer_user')->user()->addresses()->first(),
+        ]);
+    }
+
+    public function orderadd(Request $request){
+        $validatedData = $request->validate([
+            'shipping_address' => 'required|min:15',
+            'shipping_cost' => 'required',
+            'idcarts' => 'required',
+            'total_price' => 'required',
+        ]);
+
+        $idcarts = explode(',',$validatedData['idcarts']);
+        $carts = Cart::whereIn('id',$idcarts)->get();
+
+        $neworder = Order::create([
+            'order_status' => 'not_paid',
+            'shipping_address' => $validatedData['shipping_address'],
+            'shipping_status' => 'Belum dikirim',
+            'shipping_number' => 'not_shipped',
+            'shipping_cost' => $validatedData['shipping_cost'],
+            'buyer_user_id' => Auth::guard('buyer_user')->user()->id,
+            'total_price' => $validatedData['total_price'],
+        ]);
+
+        foreach($carts as $cart){
+            OrderDetail::create([
+                'order_id' => $neworder->id,
+                'laptop_id' => $cart->laptop_id,
+                'order_detail_amount' => $cart->cart_amount,
+                'order_detail_note' => $cart->cart_note,
+                'price_subtotal' => $cart->cart_amount * $cart->laptop->laptop_price,
+                'weight_subtotal' => $cart->cart_amount * $cart->laptop->laptop_weight,
+            ]);
+        }
+
+        Cart::whereIn('id',$idcarts)->delete();
+        
+        return redirect()->route('buyer-order.all')->with('orderaddsuccess', 'Order added successfully!');
     }
 
     public function orderindex(){

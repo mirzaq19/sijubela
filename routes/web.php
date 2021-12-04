@@ -50,13 +50,17 @@ Route::post('/admin-logout', [AdminController::class, 'logout'])->name('admin-lo
 Route::get('/product/{laptop}', [FrontController::class, 'show'])->name('product');
 
 Route::group(['middleware' => 'is_buyer'], function () {
-    // PEMBELI
+    // CART
     Route::get('/cart', [PembeliController::class, 'cart'])->name('cart');
     Route::post('/addcart', [PembeliController::class, 'cartadd'])->name('cart.add');
     Route::post('/deletecart/{cart}', [PembeliController::class, 'cartdelete'])->name('cart.delete');
 
+    // CHECKOUT
+    Route::post('/checkout', [PembeliController::class, 'checkout'])->name('checkout');
+
     // ORDER
     Route::get('/order', [PembeliController::class, 'orderindex'])->name('buyer-order.index');
+    Route::post('/order', [PembeliController::class, 'orderadd'])->name('buyer-order.add');
     Route::get('/order/all', [PembeliController::class, 'orderall'])->name('buyer-order.all');
     Route::get('/order/notpay', [PembeliController::class, 'ordernotpay'])->name('buyer-order.notpay');
     Route::get('/order/packing', [PembeliController::class, 'orderpacking'])->name('buyer-order.packing');
