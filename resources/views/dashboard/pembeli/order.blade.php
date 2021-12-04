@@ -149,7 +149,8 @@
             @endif
 
             @if ($order->order_status == 'packing' || $order->order_status == 'shipping')
-                <p class="mb-0"><strong>Status Pengiriman: </strong>{{ $order->shipping_status }}</p>
+                <p class="mb-0"><strong>Status Pengiriman: </strong></p>
+                <p>{{ $order->shipping_status }}</p>
             @endif
 
             <h5 class="text-end"><i class="text-blue fas fa-clipboard-check"></i> Total: Rp.
