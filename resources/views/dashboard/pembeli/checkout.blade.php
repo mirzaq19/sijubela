@@ -49,7 +49,7 @@
                         <textarea type="text" class="form-control" id="shipping_address" name="shipping_address"
                             rows="3">{{ $address ? $address->full_address . ', ' . $address->village . ', ' . $address->subdistrict . ', ' . $address->district . ', ' . $address->province . ', ' . $address->postal_code : '' }}</textarea>
                     </div>
-                    {{-- <a class="btn btn-secondary" href="{{ route('cart') }}">Batal</a> --}}
+                    {{-- <a class="btn btn-secondary" href="{{ route('cart.index') }}">Batal</a> --}}
                     <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
                         data-bs-target="#modal-cancel-confirm">Batalkan pesanan</button>
                     <button id="addorderbutton" class="btn btn-blue" type="submit">Buat Pesanan</button>
@@ -71,7 +71,7 @@
                     </p>
                     <div class="mt-3">
                         <button type="button" class="btn btn-secondary m-0 me-sm-3" data-bs-dismiss="modal">Batal</button>
-                        <a href="{{ route('cart') }}" class="btn btn-blue">Iya</a>
+                        <a href="{{ route('cart.index') }}" class="btn btn-blue">Iya</a>
                     </div>
                 </div>
             </div>

@@ -25,7 +25,7 @@
                                     class="fas fa-search text-blue"></i></button>
                         </div>
                         @auth('buyer_user')
-                            <a class="m-0 ms-4 text-white h3" href="{{ route('cart') }}"><i
+                            <a class="m-0 ms-4 text-white h3" href="{{ route('cart.index') }}"><i
                                     class="fas fa-shopping-cart"></i></a>
                         @endauth
                     </form>
