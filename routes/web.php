@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardAdminCatalogController;
 use App\Http\Controllers\DashboardAdminOfferController;
 use App\Http\Controllers\DashboardAdminOrderController;
+use App\Http\Controllers\DashboardAdminFinanceController;
 use App\Models\AdminUser;
 
 /*
@@ -90,5 +91,5 @@ Route::get('/admin-dashboard', [AdminController::class, 'dashboard'])->name('adm
 Route::resource('/admin-dashboard/orders', DashboardAdminOrderController::class)->middleware('is_admin');
 Route::resource('/admin-dashboard/laptops', DashboardAdminCatalogController::class)->middleware('is_admin');
 Route::resource('/admin-dashboard/sell_laptops', DashboardAdminOfferController::class)->middleware('is_admin');
-
+Route::resource('/admin-dashboard/finance', DashboardAdminFinanceController::class)->middleware('is_admin');
 
