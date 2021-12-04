@@ -75,6 +75,49 @@
 
                 @endforeach
 
+                <p class="h4">Payment</p>
+                <div class="row mt-2">
+                    <div class="col-md-6">
+                        <img class="img-thumbnail" src="{{ asset($payment->payment_image) }}" alt="Payment">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="payment_account_name" class="form-label">Account Name</label>
+                                <input type="text" class="form-control" id="payment_account_name"
+                                    placeholder="{{ $payment->payment_account_name }}" disabled readonly>
+                            </div>
+                            <div class="col-12">
+                                <label for="payment_account_number" class="form-label">Account Number</label>
+                                <input type="text" class="form-control" id="payment_account_number"
+                                    placeholder="{{ $payment->payment_account_number }}" disabled readonly>
+                            </div>
+                            <div class="col-12">
+                                <label for="payment_bank_name" class="form-label">Bank Name</label>
+                                <input type="text" class="form-control" id="payment_bank_name"
+                                    placeholder="{{ Str::upper($payment->payment_bank_name) }}" disabled readonly>
+                            </div>
+                            <div class="col-12">
+                                <label for="payment_status" class="form-label">Payment Status</label>
+                                <select type="text" name="payment_status" class="form-select" id="payment_status">
+                                    <option value="{{ $payment->payment_status }}" selected>
+                                        {{ Str::ucfirst($payment->payment_status) }}
+                                    </option>
+                                    @if ($payment->payment_status != 'waiting')
+                                        <option value="waiting">Waiting</option>
+                                    @endif
+                                    @if ($payment->payment_status != 'confirmed')
+                                        <option value="confirmed">Confirmed</option>
+                                    @endif
+                                    @if ($payment->payment_status != 'invalid')
+                                        <option value="invalid">Invalid</option>
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <p class="h4">Summary</p>
 
                 <div class="col-md-6">
