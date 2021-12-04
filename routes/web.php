@@ -84,6 +84,11 @@ Route::group(['middleware' => 'is_buyer'], function () {
 
 // PENJUAL
 Route::get('/dashboard', [PenjualController::class, 'dashboard'])->name('penjual-dashboard')->middleware('is_seller');
+Route::get('/dashboard/offer',[PenjualController::class,'offers'])->name('penjual-dashboard-offers')->middleware('is_seller');
+Route::get('/dashboard/offer/accepted',[PenjualController::class,'offersaccepted'])->name('penjual-dashboard-offers-accepted')->middleware('is_seller');
+Route::get('dashboard/offer/rejected',[PenjualController::class,'offersrejected'])->name('penjual-dashboard-offers-rejected')->middleware('is_seller');
+Route::get('dashboard/add-laptop',[PenjualController::class,'addlaptop'])->name('penjual-dashboard-add-laptop')->middleware('is_seller');
+Route::post('dashboard/add-laptop',[PenjualController::class,'storelaptop'])->name('penjual-dashboard-store-laptop')->middleware('is_seller');
 
 // ADMIN
 Route::get('/admin-dashboard', [AdminController::class, 'dashboard'])->name('admin-dashboard')->middleware('is_admin');
