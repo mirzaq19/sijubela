@@ -62,7 +62,7 @@
                         <tbody>
                             <div class="tab-content" id="nav-tabContent">
                                 <div class="tab-pane fade show active" id="status-wait-confirmation" role="tabpanel"
-                                    aria-labelledby="status-wait-confirmation-tab">
+                                    aria-labelledby="status-wait-confirmation">
                                     @foreach ($offers as $offer)
                                         <tr>
                                             <th class="text-center" scope="row">{{ $loop->iteration }}</th>
@@ -80,7 +80,7 @@
                                     @endforeach
                                 </div>
                                 <div class="tab-pane fade" id="status-rejected" role="tabpanel"
-                                    aria-labelledby="status-rejected-tab">
+                                    aria-labelledby="status-rejected">
                                     @foreach ($offers_rejected as $offer)
                                         <tr>
                                             <th class="text-center" scope="row">{{ $loop->iteration }}</th>
@@ -98,7 +98,7 @@
                                     @endforeach
                                 </div>
                                 <div class="tab-pane fade" id="status-accepted" role="tabpanel"
-                                    aria-labelledby="status-accepted-tab">
+                                    aria-labelledby="status-accepted">
                                     @foreach ($offers_accepted as $offer)
                                         <tr>
                                             <th class="text-center" scope="row">{{ $loop->iteration }}</th>
@@ -127,5 +127,10 @@
 @endsection
 
 @section('afterscript')
-
+    {{-- <script>
+        var triggerEl = document.querySelector('#status-wait-confirmation a[href="#status-wait-confirmation"]')
+        bootstrap.Tab.getInstance(triggerEl).show() // Select tab by name
+        var triggerEl = document.querySelector('#status-rejected a[href="#status-rejected"]')
+        bootstrap.Tab.getInstance(triggerEl).show() // Select tab by name
+    </script> --}}
 @endsection

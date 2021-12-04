@@ -41,6 +41,7 @@
                                 <th class="text-center" scope="col">Laptop</th>
                                 <th class="text-center" scope="col">Amount</th>
                                 <th class="text-center" scope="col">Price</th>
+                                <th class="text-center" scope="col">Date</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -56,6 +57,8 @@
                                             <td class="text-center">{{ $orderdetail->order_detail_amount }}</td>
                                             <td class="text-center">
                                                 {{ number_format($orderdetail->price_subtotal, 0, ',', '.') }}</td>
+                                            <td class="text-center">
+                                                {{ date('d M Y', strtotime($orderdetail->created_at)) }}</td>
 
 
                                     @endforeach
@@ -69,6 +72,9 @@
                                             </td>
                                             <td class="text-center">Rp
                                                 {{ number_format($sell_laptop->sell_laptop_price, 0, ',', '.') }}</td>
+                                            <td class="text-center">
+                                                {{ date('d M Y', strtotime($orderdetail->created_at)) }}</td>
+
                                         </tr>
                                     @endforeach
                                 </div>
