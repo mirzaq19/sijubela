@@ -165,43 +165,43 @@ class PembeliController extends Controller
     public function orderall(){
         return view('dashboard.pembeli.order',[
             'title' => 'Semua Pesanan',
-            'orders' => Auth::guard('buyer_user')->user()->orders()->get(),
+            'orders' => Auth::guard('buyer_user')->user()->orders()->orderByDesc('created_at')->get(),
         ]);
     }
     public function ordernotpay(){
         return view('dashboard.pembeli.order',[
             'title' => 'Belum Bayar',
-            'orders' => Auth::guard('buyer_user')->user()->orders()->where('order_status','not_paid')->get(),
+            'orders' => Auth::guard('buyer_user')->user()->orders()->where('order_status','not_paid')->orderByDesc('created_at')->get(),
         ]);
     }
     public function orderpay(){
         return view('dashboard.pembeli.order',[
             'title' => 'Sudah Bayar',
-            'orders' => Auth::guard('buyer_user')->user()->orders()->where('order_status','paid')->get(),
+            'orders' => Auth::guard('buyer_user')->user()->orders()->where('order_status','paid')->orderByDesc('created_at')->get(),
         ]);
     }
     public function orderpacking(){
         return view('dashboard.pembeli.order',[
             'title' => 'Dikemas',
-            'orders' => Auth::guard('buyer_user')->user()->orders()->where('order_status','packing')->get(),
+            'orders' => Auth::guard('buyer_user')->user()->orders()->where('order_status','packing')->orderByDesc('created_at')->get(),
         ]);
     }
     public function ordershipping(){
         return view('dashboard.pembeli.order',[
             'title' => 'Dikirim',
-            'orders' => Auth::guard('buyer_user')->user()->orders()->where('order_status','shipping')->get(),
+            'orders' => Auth::guard('buyer_user')->user()->orders()->where('order_status','shipping')->orderByDesc('created_at')->get(),
         ]);
     }
     public function orderfinish(){
         return view('dashboard.pembeli.order',[
             'title' => 'Selesai',
-            'orders' => Auth::guard('buyer_user')->user()->orders()->where('order_status','finished')->get(),
+            'orders' => Auth::guard('buyer_user')->user()->orders()->where('order_status','finished')->orderByDesc('created_at')->get(),
         ]);
     }
     public function ordercancel(){
         return view('dashboard.pembeli.order',[
             'title' => 'Dikemas',
-            'orders' => Auth::guard('buyer_user')->user()->orders()->where('order_status','cancel')->get(),
+            'orders' => Auth::guard('buyer_user')->user()->orders()->where('order_status','cancel')->orderByDesc('created_at')->get(),
         ]);
     }
     public function ordercanceladd(Request $request){
