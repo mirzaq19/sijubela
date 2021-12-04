@@ -22,7 +22,7 @@
 @endsection
 
 @section('content')
-    <div class="container my-5 bg-white">
+    <div class="container my-5 bg-white rounded">
         <form class="px-2" action="/seller-register" method="POST">
             @csrf
             <div class="divider d-flex align-items-center pt-4 mb-5">
