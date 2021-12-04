@@ -56,8 +56,9 @@
                                 @if ($cart->cart_note)
                                     <p>Note : {{ $cart->cart_note }}</p>
                                 @endif
-                                <form action="{{ route('cart.delete', $cart->id) }}" method="post">
+                                <form action="{{ route('cart.destroy', $cart->id) }}" method="post">
                                     @csrf
+                                    @method('DELETE')
                                     <button onclick="confirm('Yakin ingin menghapus barang ini dari keranjang?')"
                                         class="btn btn-danger"><i class="fas fa-trash"></i> Hapus</button>
                                 </form>
@@ -76,7 +77,7 @@
                 <a href="{{ route('beranda') }}" class="btn btn-secondary btn-block">Lanjutkan Belanja</a>
             </div>
             <div class="col-auto">
-                <form action="{{ route('checkout') }}" method="POST">
+                <form action="{{ route('cart.checkout') }}" method="POST">
                     @csrf
                     <input type="hidden" name="idcarts" id="idcarts">
                     <button type="submit" class="btn btn-blue btn-block disabled" id="checkout">Checkout</button>

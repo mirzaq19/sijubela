@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\PembeliController;
 use App\Http\Controllers\PenjualController;
 use App\Http\Controllers\AdminController;
@@ -51,12 +52,8 @@ Route::get('/product/{laptop}', [FrontController::class, 'show'])->name('product
 
 Route::group(['middleware' => 'is_buyer'], function () {
     // CART
-    Route::get('/cart', [PembeliController::class, 'cart'])->name('cart');
-    Route::post('/addcart', [PembeliController::class, 'cartadd'])->name('cart.add');
-    Route::post('/deletecart/{cart}', [PembeliController::class, 'cartdelete'])->name('cart.delete');
-
-    // CHECKOUT
-    Route::post('/checkout', [PembeliController::class, 'checkout'])->name('checkout');
+    Route::resource('cart', CartController::class);
+    Route::post('cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 
     // ORDER
     Route::get('/order', [PembeliController::class, 'orderindex'])->name('buyer-order.index');

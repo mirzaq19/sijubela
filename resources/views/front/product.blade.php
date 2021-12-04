@@ -99,7 +99,7 @@
                 <h3>Belanja Sekarang</h3>
                 <div class="row mt-2 mb-4">
                     <div class="col-md-6">
-                        <form action="{{ route('cart.add') }}" method="POST">
+                        <form action="{{ route('cart.store') }}" method="POST">
                             @csrf
                             <input type="hidden" name="buyer_user_id" id="buyer_user_id"
                                 value="{{ Auth::guard('buyer_user')->user()->id }}">
@@ -188,7 +188,7 @@
                     <div class="mt-3">
                         <button type="button" class="btn btn-secondary m-0 me-sm-3" data-bs-dismiss="modal">Lanjutkan
                             Belanja</button>
-                        <a href="{{ route('cart') }}" class="btn btn-blue">Ke keranjang</a>
+                        <a href="{{ route('cart.index') }}" class="btn btn-blue">Ke keranjang</a>
                     </div>
                 </div>
             </div>
@@ -208,7 +208,7 @@
                     <div class="mt-3">
                         <button type="button" class="btn btn-secondary m-0 me-sm-3" data-bs-dismiss="modal">Lanjutkan
                             Belanja</button>
-                        <a href="{{ route('cart') }}" class="btn btn-blue">Ke keranjang</a>
+                        <a href="{{ route('cart.index') }}" class="btn btn-blue">Ke keranjang</a>
                     </div>
                 </div>
             </div>

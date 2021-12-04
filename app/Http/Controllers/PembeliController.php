@@ -66,62 +66,6 @@ class PembeliController extends Controller
         return redirect()->route('beranda');
     }
 
-    public function cart()
-    {
-        return view('dashboard.pembeli.cart',[
-            'carts' => Cart::where('buyer_user_id', Auth::guard('buyer_user')->user()->id)->get(),
-        ]);
-    }
-
-    public function cartadd(Request $request){
-        $validatedData = $request->validate([
-            'buyer_user_id' => 'required',
-            'laptop_id' => 'required',
-            'qty' => 'required|numeric',
-            'notelaptop' => 'max:255',
-        ]);
-
-        $cart = Cart::where('buyer_user_id', $validatedData['buyer_user_id'])->where('laptop_id', $validatedData['laptop_id'])->first();
-
-        if($cart){
-            $cart->cart_amount = $cart->cart_amount + $validatedData['qty'];
-            $cart->cart_note = $validatedData['notelaptop'];
-            $cart->save();
-        }else{
-            Cart::create([
-                'laptop_id' => $validatedData['laptop_id'],
-                'buyer_user_id' => $validatedData['buyer_user_id'],
-                'cart_amount' => $validatedData['qty'],
-                'cart_note' => $validatedData['notelaptop'],
-            ]);
-        }
-
-        return redirect()->route('product',$validatedData['laptop_id'])->with('success', 'Item added to cart');
-    }
-
-    public function cartdelete(Cart $cart){
-        $cart->delete();
-        return redirect()->route('cart')->with('success', 'Item deleted from cart');
-    }
-
-    public function checkout(Request $request){
-        $idcarts = explode(',',$request->idcarts);
-        $carts = Cart::whereIn('id',$idcarts)->get();
-        $total = 0;
-        $cost = 0;
-        foreach($carts as $cart){
-            $total = $total + ($cart->cart_amount * $cart->laptop->laptop_price);
-            $cost = $cost + ($cart->cart_amount * $cart->laptop->laptop_weight*10000);
-        }
-        return view('dashboard.pembeli.checkout',[
-            'idcarts' => $request->idcarts,
-            'carts' => $carts,
-            'cost' => $cost,
-            'total' => $total,
-            'address' =>Auth::guard('buyer_user')->user()->addresses()->first(),
-        ]);
-    }
-
     public function orderadd(Request $request){
         $validatedData = $request->validate([
             'shipping_address' => 'required|min:15',
