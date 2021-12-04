@@ -87,6 +87,7 @@
         <div class="text-center mt-3">
             <h2>Rp. <span id="price">{{ number_format($laptop->laptop_price, 0, ',', '.') }}</span></h2>
             <h4>Stok : <span id="stock">{{ $laptop->laptop_stock }}</span></h4>
+            <h4>Kondisi : <span id="stock">{{ $laptop->laptop_condition ? 'Baru' : 'Bekas' }}</span></h4>
         </div>
         <div class="product-desc">
             <h3>Deskripsi Produk: </h3>

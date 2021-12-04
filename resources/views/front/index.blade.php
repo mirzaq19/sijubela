@@ -195,6 +195,8 @@
                                 <div class="card-body text-center">
                                     <h6 class="card-title">{{ $laptop->laptop_name }}</h6>
                                     <p class="mb-2">Stock: {{ $laptop->laptop_stock }}</p>
+                                    <p class="mb-2">Kondisi: {{ $laptop->laptop_condition ? 'Baru' : 'Bekas' }}
+                                    </p>
                                     <p class="mb-2">Rp.
                                         {{ number_format($laptop->laptop_price, 0, ',', '.') }}</p>
                                     <a class="btn btn-blue" href="{{ route('product', $laptop) }}">Lihat produk</a>
