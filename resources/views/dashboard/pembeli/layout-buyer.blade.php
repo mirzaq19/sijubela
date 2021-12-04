@@ -5,7 +5,16 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="menu-user bg-white p-4 rounded">
-                    <h1 class="mb-4"><i class="fs-1 far fa-user-circle"></i> John</h1>
+                    <div class="row mb-4">
+                        <div class="col-lg-2 text-center text-lg-start">
+                            <i class="fs-1 far fa-user-circle"></i>
+                        </div>
+                        <div class="col-lg-10 d-flex align-items-center justify-content-center justify-content-lg-start">
+                            <p class="fs-6 m-0 text-center">
+                                <strong>{{ Auth::guard('buyer_user')->user()->buyer_full_name }}</strong>
+                            </p>
+                        </div>
+                    </div>
                     <p class="m-0 mb-2">
                         @if (Request::is('account/*'))
                             <span class="text-blue">
