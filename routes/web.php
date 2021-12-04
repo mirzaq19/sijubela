@@ -70,6 +70,8 @@ Route::group(['middleware' => 'is_buyer'], function () {
     Route::get('/order/cancel', [PembeliController::class, 'ordercancel'])->name('buyer-order.cancel');
     Route::post('/order/cancel/add', [PembeliController::class, 'ordercanceladd'])->name('buyer-order.cancel.add');
     Route::post('/order/addpayment', [PembeliController::class, 'orderaddpayment'])->name('buyer-order.addpayment');
+    Route::post('/order/formtestimoni', [PembeliController::class, 'orderformtestimoni'])->name('buyer-order.formtestimoni');
+    Route::post('/order/addtestimoni', [PembeliController::class, 'orderaddtestimoni'])->name('buyer-order.addtestimoni');
 
     // AKUN PEMBELI
     Route::get('/account', [PembeliController::class, 'accountindex'])->name('buyer-account.index');

@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Payment;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -243,6 +244,37 @@ class PembeliController extends Controller
         ]);
 
         return redirect()->route('buyer-order.all')->with('paymentsuccess', 'Payment added successfully!');
+    }
+
+    public function orderformtestimoni(Request $request){
+        $validatedData = $request->validate([
+            'id' => 'required',
+        ]);
+        $orderdetail = OrderDetail::find($validatedData['id']);
+        return view('dashboard.pembeli.testimoni',[
+            'laptop' => $orderdetail->laptop,
+            'amount' => $orderdetail->order_detail_amount,
+            'total' => $orderdetail->price_subtotal,
+            'buyer_id' => $orderdetail->order->buyer_user->id,
+            'order_detail_id' => $orderdetail->id,
+        ]);
+    }
+
+    public function orderaddtestimoni(Request $request){
+        $validatedData = $request->validate([
+            'buyer_user_id' => 'required',
+            'order_detail_id' => 'required',
+            'laptop_id' => 'required',
+            'rating' => 'required',
+            'testimonial_desc' => 'required',
+        ]);
+
+        Testimonial::create($validatedData);
+        $orderdetail = OrderDetail::find($validatedData['order_detail_id']);
+        $orderdetail->reviewed = true;
+        $orderdetail->save();
+
+        return redirect()->route('buyer-order.all')->with('testimoniaddsuccess', 'Testimoni added successfully!');
     }
 
     public function accountindex()
