@@ -161,22 +161,57 @@ class PembeliController extends Controller
         return redirect()->route('buyer-order.all');
     }
     public function orderall(){
-        return view('dashboard.pembeli.order');
+        return view('dashboard.pembeli.order',[
+            'title' => 'Semua Pesanan',
+            'orders' => Auth::guard('buyer_user')->user()->orders()->get(),
+        ]);
     }
     public function ordernotpay(){
-        return view('dashboard.pembeli.order');
+        return view('dashboard.pembeli.order',[
+            'title' => 'Belum Bayar',
+            'orders' => Auth::guard('buyer_user')->user()->orders()->where('order_status','not_paid')->get(),
+        ]);
+    }
+    public function orderpay(){
+        return view('dashboard.pembeli.order',[
+            'title' => 'Sudah Bayar',
+            'orders' => Auth::guard('buyer_user')->user()->orders()->where('order_status','paid')->get(),
+        ]);
     }
     public function orderpacking(){
-        return view('dashboard.pembeli.order');
+        return view('dashboard.pembeli.order',[
+            'title' => 'Dikemas',
+            'orders' => Auth::guard('buyer_user')->user()->orders()->where('order_status','packing')->get(),
+        ]);
     }
     public function ordershipping(){
-        return view('dashboard.pembeli.order');
+        return view('dashboard.pembeli.order',[
+            'title' => 'Dikirim',
+            'orders' => Auth::guard('buyer_user')->user()->orders()->where('order_status','shipping')->get(),
+        ]);
     }
     public function orderfinish(){
-        return view('dashboard.pembeli.order');
+        return view('dashboard.pembeli.order',[
+            'title' => 'Selesai',
+            'orders' => Auth::guard('buyer_user')->user()->orders()->where('order_status','finished')->get(),
+        ]);
     }
     public function ordercancel(){
-        return view('dashboard.pembeli.order');
+        return view('dashboard.pembeli.order',[
+            'title' => 'Dikemas',
+            'orders' => Auth::guard('buyer_user')->user()->orders()->where('order_status','cancel')->get(),
+        ]);
+    }
+    public function ordercanceladd(Request $request){
+        $validatedData = $request->validate([
+            'order_id' => 'required',
+        ]);
+
+        $order = Order::find($validatedData['order_id']);
+        $order->order_status = 'cancel';
+        $order->save();
+        
+        return redirect()->route('buyer-order.cancel')->with('canceladdsuccess', 'Order canceled successfully!');
     }
 
     public function accountindex()

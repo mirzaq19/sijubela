@@ -63,10 +63,12 @@ Route::group(['middleware' => 'is_buyer'], function () {
     Route::post('/order', [PembeliController::class, 'orderadd'])->name('buyer-order.add');
     Route::get('/order/all', [PembeliController::class, 'orderall'])->name('buyer-order.all');
     Route::get('/order/notpay', [PembeliController::class, 'ordernotpay'])->name('buyer-order.notpay');
+    Route::get('/order/pay', [PembeliController::class, 'orderpay'])->name('buyer-order.pay');
     Route::get('/order/packing', [PembeliController::class, 'orderpacking'])->name('buyer-order.packing');
     Route::get('/order/shipping', [PembeliController::class, 'ordershipping'])->name('buyer-order.shipping');
     Route::get('/order/finish', [PembeliController::class, 'orderfinish'])->name('buyer-order.finish');
     Route::get('/order/cancel', [PembeliController::class, 'ordercancel'])->name('buyer-order.cancel');
+    Route::post('/order/cancel/add', [PembeliController::class, 'ordercanceladd'])->name('buyer-order.cancel.add');
 
     // AKUN PEMBELI
     Route::get('/account', [PembeliController::class, 'accountindex'])->name('buyer-account.index');

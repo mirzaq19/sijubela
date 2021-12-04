@@ -19,6 +19,7 @@ class CreateOrderDetailsTable extends Migration
             $table->string('order_detail_note')->nullable();
             $table->integer('price_subtotal');
             $table->float('weight_subtotal');
+            $table->boolean('reviewed')->default(false);
             $table->timestamps();
 
             // FK
