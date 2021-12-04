@@ -41,7 +41,7 @@
             <div class="col-md-8">
                 <form id="addorderform" action="{{ route('buyer-order.add') }}" method="post">
                     @csrf
-                    <input type="hidden" name="total_price" id="total_price" value="{{ $total }}">
+                    <input type="hidden" name="total_price" id="total_price" value="{{ $total + $cost }}">
                     <input type="hidden" name="shipping_cost" id="shipping_cost" value="{{ $cost }}">
                     <input type="hidden" name="idcarts" id="id_carts" value="{{ $idcarts }}">
                     <div class="mb-3">

@@ -391,6 +391,24 @@ class DatabaseSeeder extends Seeder
             'total_price' => 13050000,
         ]);
 
+        OrderDetail::create([
+            'order_id' => 4,
+            'laptop_id' => 4,
+            'order_detail_amount' => 1,
+            'order_detail_note' => 'lorem ipsum',
+            'price_subtotal' => 5500000,
+            'weight_subtotal' => 2.0,
+        ]);
+
+        OrderDetail::create([
+            'order_id' => 4,
+            'laptop_id' => 2,
+            'order_detail_amount' => 1,
+            'order_detail_note' => 'lorem ipsum',
+            'price_subtotal' => 7500000,
+            'weight_subtotal' => 1.2,
+        ]);
+
         Order::create([
             'buyer_user_id' => 2,
             'order_status' => 'paid',
@@ -402,25 +420,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         OrderDetail::create([
-            'order_id' => 4,
-            'laptop_id' => 4,
-            'order_detail_amount' => 1,
-            'order_detail_note' => 'lorem ipsum',
-            'price_subtotal' => 5500000,
-            'weight_subtotal' => 2.0,
-        ]);
-
-        OrderDetail::create([
-            'order_id' => 1,
-            'laptop_id' => 2,
-            'order_detail_amount' => 1,
-            'order_detail_note' => 'lorem ipsum',
-            'price_subtotal' => 7500000,
-            'weight_subtotal' => 1.2,
-        ]);
-
-        OrderDetail::create([
-            'order_id' => 2,
+            'order_id' => 5,
             'laptop_id' => 2,
             'order_detail_amount' => 2,
             'order_detail_note' => 'lorem ipsum',
