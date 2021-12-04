@@ -42,6 +42,12 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
+    @if (session()->has('testimoniaddsuccess'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('testimoniaddsuccess') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <div class="order-nav rounded bg-white py-2 mt-3 m-md-0">
         <nav class="nav nav-fill">
             @if (Request::is('order/all'))
@@ -102,7 +108,11 @@
                                 </div>
                             </div>
                             @if (!$item->reviewed && $order->order_status == 'finished')
-                                <a href="#" class="btn btn-blue">Tulis testimoni</a>
+                                <form action="{{ route('buyer-order.formtestimoni') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ $item->id }}">
+                                    <button type="submit" class="btn btn-blue">Tulis testimoni</button>
+                                </form>
                             @endif
                             @if ($item->reviewed && $order->order_status == 'finished')
                                 <a href="{{ route('product', $item->laptop_id) }}" class="btn btn-blue">Beli lagi</a>

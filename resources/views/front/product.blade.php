@@ -156,7 +156,11 @@
                             @endfor
                         </span>
                         <p class="bg-lightgrey p-3 mt-3 rounded">
-                            {{ $testimoni->testimonial_desc }}
+                            @if ($testimoni->testimonial_desc)
+                                {{ $testimoni->testimonial_desc }}
+                            @else
+                                <i>Belum ada testimonial</i>
+                            @endif
                         </p>
                     </div>
                 </div>

@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Payment;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -164,43 +165,43 @@ class PembeliController extends Controller
     public function orderall(){
         return view('dashboard.pembeli.order',[
             'title' => 'Semua Pesanan',
-            'orders' => Auth::guard('buyer_user')->user()->orders()->get(),
+            'orders' => Auth::guard('buyer_user')->user()->orders()->orderByDesc('created_at')->get(),
         ]);
     }
     public function ordernotpay(){
         return view('dashboard.pembeli.order',[
             'title' => 'Belum Bayar',
-            'orders' => Auth::guard('buyer_user')->user()->orders()->where('order_status','not_paid')->get(),
+            'orders' => Auth::guard('buyer_user')->user()->orders()->where('order_status','not_paid')->orderByDesc('created_at')->get(),
         ]);
     }
     public function orderpay(){
         return view('dashboard.pembeli.order',[
             'title' => 'Sudah Bayar',
-            'orders' => Auth::guard('buyer_user')->user()->orders()->where('order_status','paid')->get(),
+            'orders' => Auth::guard('buyer_user')->user()->orders()->where('order_status','paid')->orderByDesc('created_at')->get(),
         ]);
     }
     public function orderpacking(){
         return view('dashboard.pembeli.order',[
             'title' => 'Dikemas',
-            'orders' => Auth::guard('buyer_user')->user()->orders()->where('order_status','packing')->get(),
+            'orders' => Auth::guard('buyer_user')->user()->orders()->where('order_status','packing')->orderByDesc('created_at')->get(),
         ]);
     }
     public function ordershipping(){
         return view('dashboard.pembeli.order',[
             'title' => 'Dikirim',
-            'orders' => Auth::guard('buyer_user')->user()->orders()->where('order_status','shipping')->get(),
+            'orders' => Auth::guard('buyer_user')->user()->orders()->where('order_status','shipping')->orderByDesc('created_at')->get(),
         ]);
     }
     public function orderfinish(){
         return view('dashboard.pembeli.order',[
             'title' => 'Selesai',
-            'orders' => Auth::guard('buyer_user')->user()->orders()->where('order_status','finished')->get(),
+            'orders' => Auth::guard('buyer_user')->user()->orders()->where('order_status','finished')->orderByDesc('created_at')->get(),
         ]);
     }
     public function ordercancel(){
         return view('dashboard.pembeli.order',[
             'title' => 'Dikemas',
-            'orders' => Auth::guard('buyer_user')->user()->orders()->where('order_status','cancel')->get(),
+            'orders' => Auth::guard('buyer_user')->user()->orders()->where('order_status','cancel')->orderByDesc('created_at')->get(),
         ]);
     }
     public function ordercanceladd(Request $request){
@@ -243,6 +244,37 @@ class PembeliController extends Controller
         ]);
 
         return redirect()->route('buyer-order.all')->with('paymentsuccess', 'Payment added successfully!');
+    }
+
+    public function orderformtestimoni(Request $request){
+        $validatedData = $request->validate([
+            'id' => 'required',
+        ]);
+        $orderdetail = OrderDetail::find($validatedData['id']);
+        return view('dashboard.pembeli.testimoni',[
+            'laptop' => $orderdetail->laptop,
+            'amount' => $orderdetail->order_detail_amount,
+            'total' => $orderdetail->price_subtotal,
+            'buyer_id' => $orderdetail->order->buyer_user->id,
+            'order_detail_id' => $orderdetail->id,
+        ]);
+    }
+
+    public function orderaddtestimoni(Request $request){
+        $validatedData = $request->validate([
+            'buyer_user_id' => 'required',
+            'order_detail_id' => 'required',
+            'laptop_id' => 'required',
+            'rating' => 'required',
+            'testimonial_desc' => 'required',
+        ]);
+
+        Testimonial::create($validatedData);
+        $orderdetail = OrderDetail::find($validatedData['order_detail_id']);
+        $orderdetail->reviewed = true;
+        $orderdetail->save();
+
+        return redirect()->route('buyer-order.all')->with('testimoniaddsuccess', 'Testimoni added successfully!');
     }
 
     public function accountindex()
