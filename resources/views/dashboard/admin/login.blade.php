@@ -30,7 +30,7 @@
             </div>
         </div>
     @endif
-    <div class="container my-5 bg-white">
+    <div class="container my-5 bg-white rounded">
         <form action="/admin-login" method="POST" class="px-2">
             @csrf
             <div class="divider d-flex align-items-center pt-3 mb-5">

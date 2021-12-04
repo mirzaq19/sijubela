@@ -40,7 +40,7 @@
         </div>
     @endif
 
-    <div class="container my-5 bg-white">
+    <div class="container my-5 bg-white rounded">
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-md-9 col-lg-6 col-xl-5">
                 <img src="{{ asset('/img/asset/login-laptop.png') }}" class="img-fluid" alt="laptop-image">
