@@ -6,6 +6,7 @@ use App\Models\BuyerUser;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -210,8 +211,38 @@ class PembeliController extends Controller
         $order = Order::find($validatedData['order_id']);
         $order->order_status = 'cancel';
         $order->save();
-        
+
         return redirect()->route('buyer-order.cancel')->with('canceladdsuccess', 'Order canceled successfully!');
+    }
+
+    public function orderaddpayment(Request $request){
+        $validatedData = $request->validate([
+            'order_id' => 'required',
+            'account_name' => 'required',
+            'account_number' => 'required',
+            'bank_name' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+        ]);
+
+        $order = Order::find($validatedData['order_id']);
+        $order->order_status = 'paid';
+        $order->save();
+
+        $image = $request->file('image');
+        $name = time().'.'.$image->getClientOriginalExtension();
+        $destinationPath = public_path('img/payment');
+        $image->move($destinationPath, $name);
+
+        $payment = Payment::create([
+            'order_id' => $validatedData['order_id'],
+            'payment_account_name' => $validatedData['account_name'],
+            'payment_account_number' => $validatedData['account_number'],
+            'payment_bank_name' => $validatedData['bank_name'],
+            'payment_status' => 'waiting',
+            'payment_image' => $name,
+        ]);
+
+        return redirect()->route('buyer-order.all')->with('paymentsuccess', 'Payment added successfully!');
     }
 
     public function accountindex()

@@ -36,6 +36,12 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
+    @if (session()->has('paymentsuccess'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('paymentsuccess') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <div class="order-nav rounded bg-white py-2 mt-3 m-md-0">
         <nav class="nav nav-fill">
             @if (Request::is('order/all'))
@@ -111,17 +117,37 @@
                     </div>
                 </div>
             </div>
+
             @if ($order->order_status == 'not_paid')
                 <p class="mb-0"><strong>Silahkan melakukan pembayaran pada rekening berikut: </strong></p>
                 <p><strong>BNI: 32094392847</strong></p>
             @endif
+
+            @if ($order->order_status == 'paid')
+                @if ($order->payments()->orderByDesc('created_at')->first()->payment_status == 'waiting')
+                    <p class="mb-0"><strong>Status pembayaran:</strong></p>
+                    <p>Silahkan tunggu pembayaran dikonfirmasi oleh admin</p>
+                @endif
+                @if ($order->payments()->orderByDesc('created_at')->first()->payment_status == 'confirmed')
+                    <p class="mb-0"><strong>Status pembayaran:</strong></p>
+                    <p>Pembayaran sudah dikonfirmasi admin, barang akan segera dikemas</p>
+                @endif
+                @if ($order->payments()->orderByDesc('created_at')->first()->payment_status == 'invalid')
+                    <p class="mb-0"><strong>Status pembayaran:</strong></p>
+                    <p>Bukti pembayaran tidak valid, silahkan upload kembali bukti pembayaran</p>
+                @endif
+            @endif
+
             @if ($order->order_status == 'packing' || $order->order_status == 'shipping')
                 <p class="mb-0"><strong>Status Pengiriman: </strong>{{ $order->shipping_status }}</p>
             @endif
+
             <h5 class="text-end"><i class="text-blue fas fa-clipboard-check"></i> Total: Rp.
                 {{ number_format($order->total_price, 0, ',', '.') }}</h5>
             <div class="order-button text-end mt-4">
-                @if ($order->order_status == 'not_paid')
+                @if ($order->order_status == 'not_paid' ||
+        ($order->order_status == 'paid' &&
+            $order->payments()->orderByDesc('created_at')->first()->payment_status == 'invalid'))
                     <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#cancelConfirm"
                         data-bs-idbayar="{{ $order->id }}">Batalkan pesanan</button>
                     <button class="btn btn-blue" data-bs-toggle="modal" data-bs-target="#uploadBuktiModal"
@@ -148,7 +174,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="uploadBuktiModalLabel">Upload bukti pembayaran</h5>
                 </div>
-                <form>
+                <form action="{{ route('buyer-order.addpayment') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <input type="hidden" name="order_id" class="idbayar">
@@ -170,14 +196,14 @@
                             <input type="number" name="account_number" class="form-control" id="account_number">
                         </div>
                         <div class="mb-3">
-                            <label for="buktibayar" class="form-label">Bukti bayar: </label>
-                            <input class="form-control" type="file" id="buktibayar"
+                            <label for="image" class="form-label">Bukti bayar: </label>
+                            <input name="image" class="form-control" type="file" id="image"
                                 accept="image/png, image/gif, image/jpeg">
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-blue">Send message</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-blue">Upload</button>
                     </div>
                 </form>
             </div>

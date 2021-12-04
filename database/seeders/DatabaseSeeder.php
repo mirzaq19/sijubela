@@ -287,7 +287,7 @@ class DatabaseSeeder extends Seeder
         ]);
         Payment::create([
             'payment_image' => 'payment/r1.jpg',
-            'payment_status' => 'wait_confirmation',
+            'payment_status' => 'confirmed',
             'payment_bank_name' => 'bni',
             'payment_account_name' => 'Mirzaq',
             'payment_account_number' => '123456789',
@@ -426,6 +426,15 @@ class DatabaseSeeder extends Seeder
             'order_detail_note' => 'lorem ipsum',
             'price_subtotal' => 15000000,
             'weight_subtotal' => 2.4,
+        ]);
+
+        Payment::create([
+            'payment_image' => 'payment/r2.jpg',
+            'payment_status' => 'waiting',
+            'payment_bank_name' => 'bni',
+            'payment_account_name' => 'Mirzaq',
+            'payment_account_number' => '123456789',
+            'order_id' => 5,
         ]);
     }
 }
