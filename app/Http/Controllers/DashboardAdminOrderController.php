@@ -87,7 +87,9 @@ class DashboardAdminOrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Order $order)
-    {
+    {   
+        $order->order_status = $request->order_status;
+        $order->save();
         $order->shipping_status = $request->shipping_status;
         $order->save();
 

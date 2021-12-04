@@ -26,7 +26,7 @@
                 <div class="p-2">
 
                     <a href="/admin-dashboard/orders/{{ $order->id }}/edit"
-                        class="btn btn-primary {{ $order->order_status == 'not yet paid' ? 'disabled' : '' }}">Change
+                        class="btn btn-primary {{ $order->order_status == 'not_paid' ? 'disabled' : '' }}">Change
                         Delivery
                         Status</a>
                 </div>
@@ -82,7 +82,7 @@
                 <label for="order_status" class="form-label">Order Status</label>
 
                 <input type="text" class="form-control" id="order_status"
-                    placeholder="{{ Str::ucfirst($order->order_status) }}" disabled readonly>
+                    placeholder="{{ Str::ucfirst(str_replace('_', ' ', $order->order_status)) }}" disabled readonly>
             </div>
 
             <div class="col-md-6">

@@ -43,28 +43,36 @@
                         </thead>
                         <tbody>
                             @foreach ($orders as $order)
-                                <tr>
-                                    <th class="text-center" scope="row">{{ $loop->iteration }}</th>
-                                    <td class="text-center">
-                                        {{ $buyers->where('id', '==', $order->buyer_user_id)->pluck('buyer_username')->first() }}
-                                    </td>
-                                    <td class="text-center">
-                                        {{ $laptops->where(
-                                                'id',
-                                                '==',
-                                                $orderdetails->where('order_id', '==', $order->id)->pluck('laptop_id')->first(),
-                                            )->pluck('laptop_name')->first() }}
-                                    </td>
-                                    <td class="text-center">{{ Str::ucfirst($order->order_status) }}</td>
-                                    <td class="text-center">{{ Str::ucfirst($order->shipping_status) }}</td>
-                                    <td class="text-center">Rp
-                                        {{ number_format($order->total_price, 0, ',', '.') }}
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="/admin-dashboard/orders/{{ $order->id }}" class="badge bg-info"><i
-                                                class="fas fa-info-circle"></i></a>
-                                    </td>
-                                </tr>
+                                @if ($laptops->where(
+                'id',
+                '==',
+                $orderdetails->where('order_id', '==', $order->id)->pluck('laptop_id')->first(),
+            )->pluck('laptop_name')->first() != null)
+                                    <tr>
+                                        <th class="text-center" scope="row">{{ $loop->iteration }}</th>
+
+                                        <td class="text-center">
+                                            {{ $buyers->where('id', '==', $order->buyer_user_id)->pluck('buyer_username')->first() }}
+                                        </td>
+                                        <td class="text-center">
+                                            {{ $laptops->where(
+                                                    'id',
+                                                    '==',
+                                                    $orderdetails->where('order_id', '==', $order->id)->pluck('laptop_id')->first(),
+                                                )->pluck('laptop_name')->first() }}
+                                        </td>
+                                        <td class="text-center">
+                                            {{ Str::ucfirst(str_replace('_', ' ', $order->order_status)) }}</td>
+                                        <td class="text-center">{{ Str::ucfirst($order->shipping_status) }}</td>
+                                        <td class="text-center">Rp
+                                            {{ number_format($order->total_price, 0, ',', '.') }}
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="/admin-dashboard/orders/{{ $order->id }}" class="badge bg-info"><i
+                                                    class="fas fa-info-circle"></i></a>
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
 
                         </tbody>
