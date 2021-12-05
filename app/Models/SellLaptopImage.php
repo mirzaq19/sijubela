@@ -9,6 +9,8 @@ class SellLaptopImage extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id', 'created_at', 'updated_at'];
+
     public function sell_laptop()
     {
         return $this->belongsTo(SellLaptop::class);
