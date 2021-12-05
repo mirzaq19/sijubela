@@ -6,7 +6,7 @@
         class="list-group-item list-group-item-action {{ Request::is('dashboard/offer') || Request::is('dashboard/offer/accepted') || Request::is('dashboard/offer/rejected') ? 'active' : '' }}">
         Offers
     </a>
-    <a href="/dashboard/settings"
+    <a href="/dashboard/setting"
         class="list-group-item list-group-item-action {{ Request::is('dashboard/settings') ? 'active' : '' }}">
         Settings
     </a>
