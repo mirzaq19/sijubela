@@ -100,6 +100,7 @@ Route::delete('/dashboard/offer/detail/{id}',[PenjualController::class,'offerdet
 
 Route::get('/dashboard/offer/edit/{id}',[PenjualController::class,'offeredit'])->name('penjual-dashboard-offer-edit')->middleware('is_seller');
 Route::post('/dashboard/offer/edit/{id}',[PenjualController::class,'offereditupdate'])->name('penjual-dashboard-offer-edit-update')->middleware('is_seller');
+Route::delete('/dashboard/offer/edit/image/{id}',[PenjualController::class,'offereditimage'])->name('penjual-dashboard-offer-edit-image')->middleware('is_seller');
 
 Route::get('dashboard/offer/accepted/detail/{id}',[PenjualController::class,'offeraccepteddetail'])->name('penjual-dashboard-offer-accepted-detail')->middleware('is_seller');
 Route::get('dashboard/offer/rejected/detail/{id}',[PenjualController::class,'offerrejecteddetail'])->name('penjual-dashboard-offer-rejected-detail')->middleware('is_seller');

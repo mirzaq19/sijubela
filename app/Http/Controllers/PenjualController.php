@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\SellerUser;
 use App\Models\SellLaptop;
+use App\Models\SellLaptopImage;
 use App\Models\Bank;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class PenjualController extends Controller
 {
@@ -104,11 +106,37 @@ class PenjualController extends Controller
             'sell_laptop_weight' => 'required|numeric',
             'sell_laptop_price' => 'required|numeric',
             'sell_laptop_usage_time' => 'required|numeric',
+            'sell_laptop_image' => 'required',
+            'sell_laptop_image.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
-        $validatedData['seller_user_id'] = Auth::guard('seller_user')->id();
+        $validatedData['seller_user_id'] = Auth::guard('seller_user')->user()->id;
 
-        SellLaptop::create($validatedData);
+        $laptop = SellLaptop::create([
+            'sell_laptop_name' => $validatedData['sell_laptop_name'],
+            'sell_laptop_brand' => $validatedData['sell_laptop_brand'],
+            'sell_laptop_type' => $validatedData['sell_laptop_type'],
+            'sell_laptop_desc' => $validatedData['sell_laptop_desc'],
+            'sell_laptop_condition' => $validatedData['sell_laptop_condition'],
+            'sell_laptop_weight' => $validatedData['sell_laptop_weight'],
+            'sell_laptop_price' => $validatedData['sell_laptop_price'],
+            'sell_laptop_usage_time' => $validatedData['sell_laptop_usage_time'],
+            'seller_user_id' => $validatedData['seller_user_id'],
+        ]);
+
+        if($request->hasFile('sell_laptop_image')) {
+            $files = $request->file('sell_laptop_image');
+            foreach($files as $file) {
+                $name = time().rand(1,100).'.'.$file->getClientOriginalExtension();
+                $destinationPath = public_path('img/product');
+                $file->move($destinationPath, $name);
+                $nameWithPath = 'img/product/'.$name;
+                SellLaptopImage::create([
+                    'sell_laptop_id' => $laptop->id,
+                    'sell_laptop_image' => $nameWithPath,
+                ]);
+            }
+        }
 
         return redirect('/dashboard')->with('success', 'Laptop has been added. Please wait for admin to accept your offer');
     }
@@ -158,6 +186,15 @@ class PenjualController extends Controller
         SellLaptop::where('seller_user_id', Auth::guard('seller_user')->id())->where('id', $id)->update($validatedData);
 
         return redirect('/dashboard/offer')->with('success', 'Laptop has been updated');
+    }
+
+    public function offereditimage(SellLaptopImage $id){
+        
+        if (File::exists($id->sell_laptop_image)) {
+            File::delete($id->sell_laptop_image);
+        }
+        $id->delete();
+        return redirect()->back()->with('success', 'Laptop image has been deleted');
     }
 
     public function setting(){
