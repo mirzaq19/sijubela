@@ -44,7 +44,7 @@
 
         <p class="h2">Add New Laptop</p>
 
-        <form action="/dashboard/add-laptop" method="POST">
+        <form action="/dashboard/add-laptop" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row g-3 pb-3">
                 <div class="col-12">
@@ -160,6 +160,18 @@
                         {{ $bank == null ? 'disabled' : '' }}>
 
                     @error('sell_laptop_usage_time')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="laptop_images" class="form-label">Laptop images</label>
+                    <input class="form-control @error('sell_laptop_image.*') is-invalid @enderror" type="file"
+                        id="sell_laptop_images" accept="image/png, image/gif, image/jpeg, image/webp"
+                        name="sell_laptop_image[]" multiple required>
+                    @error('sell_laptop_image.*')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>

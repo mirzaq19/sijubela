@@ -78,6 +78,24 @@
                 aria-label="Disabled input example" disabled readonly>
         </div>
 
+        <div class="col-12">
+            <label for="sell_laptop_images" class="form-label">Laptop images</label>
+            <div class="row mb-3">
+                @foreach ($sell_laptop->sell_laptop_image()->get() as $image)
+                    <div class="col-sm-3">
+                        <figure class="figure img-thumbnail">
+                            <img src="{{ asset($image->sell_laptop_image) }}" class="figure-img img-fluid rounded"
+                                alt="Laptop Image">
+                            <figcaption class="figure-caption text-center">
+                                <a href="{{ asset($image->sell_laptop_image) }}" target="_blank"
+                                    class="btn btn-primary">View</a>
+                            </figcaption>
+                        </figure>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
 
         <div class="col-12">
             <label for="sell_laptop_desc" class="form-label">Description</label>

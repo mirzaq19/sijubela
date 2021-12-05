@@ -196,6 +196,40 @@
                 </div>
 
                 <div class="col-12">
+                    <label for="sell_laptop_images" class="form-label">Laptop images</label>
+                    <div class="row mb-3">
+                        @foreach ($sell_laptop->sell_laptop_image()->get() as $image)
+                            <div class="col-sm-3">
+                                <figure class="figure img-thumbnail">
+                                    <img src="{{ asset($image->sell_laptop_image) }}"
+                                        class="figure-img img-fluid rounded" alt="Laptop Image">
+                                    <figcaption class="figure-caption text-center">
+                                        <button class="btn btn-danger" data-bs-toggle="modal"
+                                            data-bs-imagepath="{{ $image->sell_laptop_image }}"
+                                            data-bs-imageid={{ $image->id }} data-bs-target="#deleteImageConfirmModal"
+                                            type="button">Delete</button>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        @endforeach
+                    </div>
+                    <input
+                        class="form-control @error('sell_laptop_image.*') is-invalid @enderror @error('sell_laptop_image') is-invalid @enderror"
+                        type="file" id="sell_laptop_images" accept="image/png, image/gif, image/jpeg, image/webp"
+                        name="sell_laptop_image[]" multiple>
+                    @error('sell_laptop_image.*')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                    @error('sell_laptop_image')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                <div class="col-12">
                     <label for="sell_laptop_desc" class="form-label">Description</label>
 
                     @error('sell_laptop_desc')
@@ -214,6 +248,34 @@
 
         </form>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="deleteImageConfirmModal" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="deleteImageConfirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteImageConfirmModalLabel">Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="deletedImage" class="img-thumbnail mb-3" style="max-width: 60%"
+                        data-bs-path="{{ asset('') }}" src="" alt="Laptop image">
+                    <p>
+                        Are you sure want to delete this image?
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <form method="post">
+                        @csrf
+                        @method('delete')
+                        <button type="submit" class="btn btn-danger">Yes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('afterscript')
@@ -222,4 +284,21 @@
             e.preventDefault();
         })
     </script>
+    @if ($sell_laptop->sell_laptop_image()->count() > 0)
+        <script>
+            const deleteImageConfirmModal = document.querySelector('#deleteImageConfirmModal');
+            deleteImageConfirmModal.addEventListener('show.bs.modal', function(e) {
+                const button = e.relatedTarget;
+                const imagePath = button.dataset.bsImagepath;
+                const imageId = button.dataset.bsImageid;
+                const deletedImage = document.querySelector('#deletedImage');
+                deletedImage.src = deletedImage.dataset.bsPath + imagePath;
+
+                const form = deleteImageConfirmModal.querySelector('form');
+                form.action = `/dashboard/offer/edit/image/${imageId}`;
+
+                deleteImageConfirmModal.querySelector('button.btn-danger').focus();
+            });
+        </script>
+    @endif
 @endsection
