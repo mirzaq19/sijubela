@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Laptop;
+use App\Models\LaptopImage;
 use Illuminate\Http\Request;
 
 class DashboardAdminCatalogController extends Controller
@@ -46,9 +47,34 @@ class DashboardAdminCatalogController extends Controller
             'laptop_weight' => 'required|numeric',
             'laptop_price' => 'required|numeric',
             'laptop_stock' => 'required|numeric',
+            'laptop_image' => 'required',
+            'laptop_image.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+        ]);
+        
+        $laptop = Laptop::create([
+            'laptop_name' => $validatedData['laptop_name'],
+            'laptop_brand' => $validatedData['laptop_brand'],
+            'laptop_type' => $validatedData['laptop_type'],
+            'laptop_desc' => $validatedData['laptop_desc'],
+            'laptop_condition' => $validatedData['laptop_condition'],
+            'laptop_weight' => $validatedData['laptop_weight'],
+            'laptop_price' => $validatedData['laptop_price'],
+            'laptop_stock' => $validatedData['laptop_stock'],
         ]);
 
-        Laptop::create($validatedData);
+        if($request->hasFile('laptop_image')) {
+            $files = $request->file('laptop_image');
+            foreach($files as $file) {
+                $name = time().rand(1,100).'.'.$file->getClientOriginalExtension();
+                $destinationPath = public_path('img/product');
+                $file->move($destinationPath, $name);
+                $nameWithPath = 'img/product/'.$name;
+                LaptopImage::create([
+                    'laptop_id' => $laptop->id,
+                    'laptop_image' => $nameWithPath,
+                ]);
+            }
+        }
 
         return redirect('/admin-dashboard/laptops')->with('success', 'Laptop has been added');
     }
