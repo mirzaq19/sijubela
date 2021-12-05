@@ -125,7 +125,7 @@ class DashboardAdminCatalogController extends Controller
             'laptop_weight' => 'required|numeric',
             'laptop_price' => 'required|numeric',
             'laptop_stock' => 'required|numeric',
-            'laptop_image' => 'required',
+            'laptop_image' => 'sometimes|nullable',
             'laptop_image.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
