@@ -91,7 +91,7 @@
                                     alt="brand">
                                 <div class="card-body text-center">
                                     <h3 class="card-title">Asus</h3>
-                                    <a href="#" class="btn btn-primary">See list</a>
+                                    <a href="{{ route('product.asus') }}" class="btn btn-primary">See list</a>
                                 </div>
                             </div>
                         </div>
@@ -102,7 +102,7 @@
 
                                 <div class="card-body text-center">
                                     <h3 class="card-title">Apple</h3>
-                                    <a href="#" class="btn btn-primary">See list</a>
+                                    <a href="{{ route('product.apple') }}" class="btn btn-primary">See list</a>
                                 </div>
                             </div>
                         </div>
@@ -113,7 +113,7 @@
 
                                 <div class="card-body text-center">
                                     <h3 class="card-title">Toshiba</h3>
-                                    <a href="#" class="btn btn-primary">See list</a>
+                                    <a href="{{ route('product.toshiba') }}" class="btn btn-primary">See list</a>
                                 </div>
                             </div>
                         </div>
@@ -124,7 +124,7 @@
 
                                 <div class="card-body text-center">
                                     <h3 class="card-title">Axioo</h3>
-                                    <a href="#" class="btn btn-primary">See list</a>
+                                    <a href="{{ route('product.axioo') }}" class="btn btn-primary">See list</a>
                                 </div>
                             </div>
                         </div>
@@ -135,7 +135,7 @@
 
                                 <div class="card-body text-center">
                                     <h3 class="card-title">Lenovo</h3>
-                                    <a href="#" class="btn btn-primary">See list</a>
+                                    <a href="{{ route('product.lenovo') }}" class="btn btn-primary">See list</a>
                                 </div>
                             </div>
                         </div>
@@ -146,7 +146,7 @@
 
                                 <div class="card-body text-center">
                                     <h3 class="card-title">HP</h3>
-                                    <a href="#" class="btn btn-primary">See list</a>
+                                    <a href="{{ route('product.hp') }}" class="btn btn-primary">See list</a>
                                 </div>
                             </div>
                         </div>
@@ -157,7 +157,7 @@
 
                                 <div class="card-body text-center">
                                     <h3 class="card-title">Dell</h3>
-                                    <a href="#" class="btn btn-primary">See list</a>
+                                    <a href="{{ route('product.dell') }}" class="btn btn-primary">See list</a>
                                 </div>
                             </div>
                         </div>
@@ -168,7 +168,7 @@
 
                                 <div class="card-body text-center">
                                     <h3 class="card-title">Acer</h3>
-                                    <a href="#" class="btn btn-primary">See list</a>
+                                    <a href="{{ route('product.acer') }}" class="btn btn-primary">See list</a>
                                 </div>
                             </div>
                         </div>

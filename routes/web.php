@@ -50,6 +50,14 @@ Route::post('/admin-login', [AdminController::class, 'authenticate']);
 Route::post('/admin-logout', [AdminController::class, 'logout'])->name('admin-logout');
 
 Route::get('/product/{laptop}', [FrontController::class, 'show'])->name('product');
+Route::get('/list/asus', [FrontController::class, 'listasus'])->name('product.asus');
+Route::get('/list/hp', [FrontController::class, 'listhp'])->name('product.hp');
+Route::get('/list/lenovo', [FrontController::class, 'listlenovo'])->name('product.lenovo');
+Route::get('/list/dell', [FrontController::class, 'listdell'])->name('product.dell');
+Route::get('/list/acer', [FrontController::class, 'listacer'])->name('product.acer');
+Route::get('/list/apple', [FrontController::class, 'listapple'])->name('product.apple');
+Route::get('/list/toshiba', [FrontController::class, 'listtoshiba'])->name('product.toshiba');
+Route::get('/list/axioo', [FrontController::class, 'listaxioo'])->name('product.axioo');
 
 Route::group(['middleware' => 'is_buyer'], function () {
     // CART
