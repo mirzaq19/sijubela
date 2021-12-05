@@ -286,7 +286,7 @@ class DatabaseSeeder extends Seeder
             'laptop_id' => 2,
         ]);
         Payment::create([
-            'payment_image' => 'payment/r1.jpg',
+            'payment_image' => 'img/payment/r1.jpg',
             'payment_status' => 'confirmed',
             'payment_bank_name' => 'bni',
             'payment_account_name' => 'Mirzaq',
@@ -311,7 +311,7 @@ class DatabaseSeeder extends Seeder
             'laptop_id' => 3,
         ]);
         Payment::create([
-            'payment_image' => 'payment/r2.jpg',
+            'payment_image' => 'img/payment/r2.jpg',
             'payment_status' => 'confirmed',
             'payment_bank_name' => 'bni',
             'payment_account_name' => 'Mirzaq',
@@ -429,7 +429,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Payment::create([
-            'payment_image' => 'payment/r2.jpg',
+            'payment_image' => 'img/payment/r2.jpg',
             'payment_status' => 'waiting',
             'payment_bank_name' => 'bni',
             'payment_account_name' => 'Mirzaq',
