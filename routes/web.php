@@ -92,6 +92,7 @@ Route::get('/admin-dashboard', [AdminController::class, 'dashboard'])->name('adm
 
 Route::resource('/admin-dashboard/orders', DashboardAdminOrderController::class)->middleware('is_admin');
 Route::resource('/admin-dashboard/laptops', DashboardAdminCatalogController::class)->middleware('is_admin');
+Route::delete('/admin-dashboard/laptops/image/{laptopimage}', [DashboardAdminCatalogController::class,'destroyimage'])->name('laptops.image.destroy')->middleware('is_admin');
 Route::resource('/admin-dashboard/sell_laptops', DashboardAdminOfferController::class)->middleware('is_admin');
 Route::resource('/admin-dashboard/finance', DashboardAdminFinanceController::class)->middleware('is_admin');
 

@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'Detail {{ $laptop->laptop_name }}')
+@section('title', 'Detail | ' . $laptop->laptop_name)
 
 @section('aftercss')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
@@ -8,6 +8,24 @@
     <style>
         .content {
             min-height: 0;
+        }
+
+        #laptop_desc {
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #757575;
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            cursor: default;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
 
     </style>
@@ -82,10 +100,20 @@
                     aria-label="Disabled input example" disabled readonly>
             </div>
 
+            <label class="form-label">Laptop Images</label>
+            <div class="row">
+                @foreach ($laptop->laptop_image()->get() as $image)
+                    <div class="col-sm-3">
+                        <img class="img-thumbnail" src="{{ asset($image->laptop_image) }}" alt="Laptop Image">
+                    </div>
+                @endforeach
+            </div>
+
             <div class="col-12">
                 <label for="laptop_desc" class="form-label">Description</label>
-                <textarea type="text" class="form-control" id="laptop_desc"
-                    placeholder="{{ strip_tags($laptop->laptop_desc) }}" rows="10" disabled readonly></textarea>
+                <div id="laptop_desc">
+                    {!! nl2br($laptop->laptop_desc) !!}
+                </div>
             </div>
 
         </div>

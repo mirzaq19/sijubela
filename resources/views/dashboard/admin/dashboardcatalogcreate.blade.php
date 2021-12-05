@@ -155,9 +155,16 @@
 
                 <div class="mb-3">
                     <label for="laptop_images" class="form-label">Laptop images</label>
-                    <input class="form-control @error('laptop_image.*') is-invalid @enderror" type="file" id="laptop_images"
-                        accept="image/png, image/gif, image/jpeg, image/webp" name="laptop_image[]" multiple required>
+                    <input
+                        class="form-control @error('laptop_image.*') is-invalid @enderror @error('laptop_image') is-invalid @enderror"
+                        type="file" id="laptop_images" accept="image/png, image/gif, image/jpeg, image/webp"
+                        name="laptop_image[]" multiple>
                     @error('laptop_image.*')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                    @error('laptop_image')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -166,12 +173,13 @@
 
                 <div class="col-12">
                     <label for="laptop_desc" class="form-label">Description</label>
-                    <input id="laptop_desc" type="hidden" name="laptop_desc" value="{{ old('laptop_desc') }}">
+                    <input class="form-control @error('laptop_desc') is-invalid @enderror" id="laptop_desc" type="hidden"
+                        name="laptop_desc" value="{{ old('laptop_desc') }}">
                     <trix-editor input="laptop_desc"></trix-editor>
                     @error('laptop_desc')
-                        <p class="text-danger mt-2">
+                        <div class="invalid-feedback">
                             {{ $message }}
-                        </p>
+                        </div>
                     @enderror
                 </div>
             </div>
