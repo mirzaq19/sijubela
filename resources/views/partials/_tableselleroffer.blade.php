@@ -24,7 +24,7 @@
                                 {{ number_format($offer->sell_laptop_price, 0, ',', '.') }}</td>
                             <td class="text-center">{{ $offer->sell_laptop_weight }}</td>
                             <td class="text-center">
-                                <a href="/dashboard/offer/{{ $offer->id }}" class="badge bg-info"><i
+                                <a href="/dashboard/offer/detail/{{ $offer->id }}" class="badge bg-info"><i
                                         class="fas fa-info-circle"></i></a>
                             </td>
                         </tr>
@@ -44,8 +44,8 @@
                                 {{ number_format($offer->sell_laptop_price, 0, ',', '.') }}</td>
                             <td class="text-center">{{ $offer->sell_laptop_weight }}</td>
                             <td class="text-center">
-                                <a href="/dashboard/offer/accepted/{{ $offer->id }}" class="badge bg-info"><i
-                                        class="fas fa-info-circle"></i></a>
+                                <a href="/dashboard/offer/accepted/detail/{{ $offer->id }}"
+                                    class="badge bg-info"><i class="fas fa-info-circle"></i></a>
                             </td>
                         </tr>
                     @endforeach
@@ -64,8 +64,8 @@
                                 {{ number_format($offer->sell_laptop_price, 0, ',', '.') }}</td>
                             <td class="text-center">{{ $offer->sell_laptop_weight }}</td>
                             <td class="text-center">
-                                <a href="/dashboard/offer/rejected/{{ $offer->id }}" class="badge bg-info"><i
-                                        class="fas fa-info-circle"></i></a>
+                                <a href="/dashboard/offer/rejected/detail/{{ $offer->id }}"
+                                    class="badge bg-info"><i class="fas fa-info-circle"></i></a>
                             </td>
                         </tr>
                     @endforeach

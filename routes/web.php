@@ -95,6 +95,26 @@ Route::get('dashboard/offer/rejected',[PenjualController::class,'offersrejected'
 Route::get('dashboard/add-laptop',[PenjualController::class,'addlaptop'])->name('penjual-dashboard-add-laptop')->middleware('is_seller');
 Route::post('dashboard/add-laptop',[PenjualController::class,'storelaptop'])->name('penjual-dashboard-store-laptop')->middleware('is_seller');
 
+Route::get('/dashboard/offer/detail/{id}',[PenjualController::class,'offerdetail'])->name('penjual-dashboard-offer-detail')->middleware('is_seller');
+Route::delete('/dashboard/offer/detail/{id}',[PenjualController::class,'offerdetaildelete'])->name('penjual-dashboard-offer-detail-delete')->middleware('is_seller');
+
+Route::get('/dashboard/offer/edit/{id}',[PenjualController::class,'offeredit'])->name('penjual-dashboard-offer-edit')->middleware('is_seller');
+Route::post('/dashboard/offer/edit/{id}',[PenjualController::class,'offereditupdate'])->name('penjual-dashboard-offer-edit-update')->middleware('is_seller');
+
+Route::get('dashboard/offer/accepted/detail/{id}',[PenjualController::class,'offeraccepteddetail'])->name('penjual-dashboard-offer-accepted-detail')->middleware('is_seller');
+Route::get('dashboard/offer/rejected/detail/{id}',[PenjualController::class,'offerrejecteddetail'])->name('penjual-dashboard-offer-rejected-detail')->middleware('is_seller');
+
+Route::get('dashboard/setting',[PenjualController::class,'setting'])->name('penjual-dashboard-setting')->middleware('is_seller');
+
+Route::get('dashboard/setting/edit',[PenjualController::class,'settingedit'])->name('penjual-dashboard-setting-edit')->middleware('is_seller');
+Route::post('dashboard/setting/edit',[PenjualController::class,'settingeditupdate'])->name('penjual-dashboard-setting-edit-update')->middleware('is_seller');
+
+Route::get('dashboard/setting/add-bank',[PenjualController::class,'addbank'])->name('penjual-dashboard-setting-add-bank')->middleware('is_seller');
+Route::post('dashboard/setting/add-bank',[PenjualController::class,'storebank'])->name('penjual-dashboard-setting-update-bank')->middleware('is_seller');
+
+Route::get('dashboard/setting/edit-bank/{id}',[PenjualController::class,'editbank'])->name('penjual-dashboard-setting-edit-bank')->middleware('is_seller');
+Route::post('dashboard/setting/edit-bank/{id}',[PenjualController::class,'editbankupdate'])->name('penjual-dashboard-setting-edit-bank-update')->middleware('is_seller');
+
 // ADMIN
 Route::get('/admin-dashboard', [AdminController::class, 'dashboard'])->name('admin-dashboard')->middleware('is_admin');
 
