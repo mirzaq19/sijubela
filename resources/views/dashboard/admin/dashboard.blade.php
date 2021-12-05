@@ -31,7 +31,7 @@
                     </div>
                     <div class="col">
                         <div class="card">
-                            <h3 class="card-header">Income</h3>
+                            <h3 class="card-header text-white bg-success">Income</h3>
                             <div class="card-body">
                                 <h5 class="card-title">Rp {{ number_format($price - $shipping_cost, 0, ',', '.') }}
                                 </h5>
@@ -40,7 +40,7 @@
                     </div>
                     <div class="col">
                         <div class="card">
-                            <h3 class="card-header">Expense</h3>
+                            <h3 class="card-header text-white bg-danger">Expense</h3>
                             <div class="card-body">
                                 <h5 class="card-title">Rp {{ number_format($expense, 0, ',', '.') }}</h5>
                             </div>
