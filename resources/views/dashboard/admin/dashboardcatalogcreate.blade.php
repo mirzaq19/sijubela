@@ -35,7 +35,7 @@
 
         <p class="h2">Add New Laptop</p>
 
-        <form action="/admin-dashboard/laptops" method="POST">
+        <form action="/admin-dashboard/laptops" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row g-3 pb-3">
                 <div class="col-12">
@@ -56,14 +56,14 @@
 
                     <select class="form-select @error('laptop_brand') is-invalid @enderror" name="laptop_brand"
                         id="laptop_brand" required>
-                        <option value="Acer">Acer</option>
-                        <option value="Apple">Apple</option>
-                        <option value="Asus">Asus</option>
-                        <option value="Axioo">Axioo</option>
-                        <option value="Dell">Dell</option>
-                        <option value="HP">HP</option>
-                        <option value="Lenovo">Lenovo</option>
-                        <option value="Toshiba">Toshiba</option>
+                        <option value="Acer" {{ old('laptop_brand') == 'Acer' ? 'selected' : '' }}>Acer</option>
+                        <option value="Apple" {{ old('laptop_brand') == 'Apple' ? 'selected' : '' }}>Apple</option>
+                        <option value="Asus" {{ old('laptop_brand') == 'Asus' ? 'selected' : '' }}>Asus</option>
+                        <option value="Axioo" {{ old('laptop_brand') == 'Axioo' ? 'selected' : '' }}>Axioo</option>
+                        <option value="Dell" {{ old('laptop_brand') == 'Dell' ? 'selected' : '' }}>Dell</option>
+                        <option value="HP" {{ old('laptop_brand') == 'HP' ? 'selected' : '' }}>HP</option>
+                        <option value="Lenovo" {{ old('laptop_brand') == 'Lenovo' ? 'selected' : '' }}>Lenovo</option>
+                        <option value="Toshiba" {{ old('laptop_brand') == 'Toshiba' ? 'selected' : '' }}>Toshiba</option>
                     </select>
 
                     @error('laptop_brand')
@@ -78,12 +78,14 @@
 
                     <select class="form-select @error('laptop_type') is-invalid @enderror" name="laptop_type"
                         id="laptop_type" required>
-                        <option value="2 in 1">2 in 1</option>
-                        <option value="Business">Business</option>
-                        <option value="Daily">Daily</option>
-                        <option value="Gaming">Gaming</option>
-                        <option value="Netbook">Netbook</option>
-                        <option value="Ultrabook">Ultrabook</option>
+                        <option value="2 in 1" {{ old('laptop_type') == '2 in 1' ? 'selected' : '' }}>2 in 1</option>
+                        <option value="Business" {{ old('laptop_type') == 'Business' ? 'selected' : '' }}>Business
+                        </option>
+                        <option value="Daily" {{ old('laptop_type') == 'Daily' ? 'selected' : '' }}>Daily</option>
+                        <option value="Gaming" {{ old('laptop_type') == 'Gaming' ? 'selected' : '' }}>Gaming</option>
+                        <option value="Netbook" {{ old('laptop_type') == 'Netbook' ? 'selected' : '' }}>Netbook</option>
+                        <option value="Ultrabook" {{ old('laptop_type') == 'Ultrabook' ? 'selected' : '' }}>Ultrabook
+                        </option>
                     </select>
 
                     @error('laptop_type')
@@ -98,8 +100,8 @@
 
                     <select class="form-select @error('laptop_condition') is-invalid @enderror" name="laptop_condition"
                         id="laptop_condition" required>
-                        <option value=1>New</option>
-                        <option value=0>Old</option>
+                        <option value='1' {{ old('laptop_condition') == '1' ? 'selected' : '' }}>New</option>
+                        <option value='0' {{ old('laptop_condition') == '0' ? 'selected' : '' }}>Old</option>
                     </select>
 
                     @error('laptop_condition')
@@ -151,17 +153,34 @@
                     @enderror
                 </div>
 
+                <div class="mb-3">
+                    <label for="laptop_images" class="form-label">Laptop images</label>
+                    <input
+                        class="form-control @error('laptop_image.*') is-invalid @enderror @error('laptop_image') is-invalid @enderror"
+                        type="file" id="laptop_images" accept="image/png, image/gif, image/jpeg, image/webp"
+                        name="laptop_image[]" multiple>
+                    @error('laptop_image.*')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                    @error('laptop_image')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
                 <div class="col-12">
                     <label for="laptop_desc" class="form-label">Description</label>
-
-                    @error('laptop_desc')
-                        <p class="text-danger">
-                            {{ $message }}
-                        </p>
-                    @enderror
-
-                    <input id="laptop_desc" type="hidden" name="laptop_desc" value="{{ old('laptop_desc') }}"">
+                    <input class="form-control @error('laptop_desc') is-invalid @enderror" id="laptop_desc" type="hidden"
+                        name="laptop_desc" value="{{ old('laptop_desc') }}">
                     <trix-editor input="laptop_desc"></trix-editor>
+                    @error('laptop_desc')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
             </div>
 

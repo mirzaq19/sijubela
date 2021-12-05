@@ -31,6 +31,19 @@
             background-color: rgb(226, 226, 226);
         }
 
+        .control-next-icon,
+        .control-prev-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: #00c1eb;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.4rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
     </style>
 @endsection
 
@@ -63,23 +76,25 @@
                     @foreach ($laptop->laptop_image()->get() as $image)
                         @if ($loop->first)
                             <div class="carousel-item active">
-                                <img src="{{ asset($image->laptop_image) }}" class="d-block w-100" alt="Laptop">
+                                <img draggable="false" src="{{ asset($image->laptop_image) }}" class="d-block w-100"
+                                    alt="Laptop">
                             </div>
                         @else
                             <div class="carousel-item">
-                                <img src="{{ asset($image->laptop_image) }}" class="d-block w-100" alt="Laptop">
+                                <img draggable="false" src="{{ asset($image->laptop_image) }}" class="d-block w-100"
+                                    alt="Laptop">
                             </div>
                         @endif
                     @endforeach
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselProductImg"
                     data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="control-prev-icon" aria-hidden="true"><i class="fas fa-arrow-left"></i></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
                 <button class="carousel-control-next" type="button" data-bs-target="#carouselProductImg"
                     data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="control-next-icon" aria-hidden="true"><i class="fas fa-arrow-right"></i></span>
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
@@ -87,6 +102,7 @@
         <div class="text-center mt-3">
             <h2>Rp. <span id="price">{{ number_format($laptop->laptop_price, 0, ',', '.') }}</span></h2>
             <h4>Stok : <span id="stock">{{ $laptop->laptop_stock }}</span></h4>
+            <h4>Kondisi : <span id="stock">{{ $laptop->laptop_condition ? 'Baru' : 'Bekas' }}</span></h4>
         </div>
         <div class="product-desc">
             <h3>Deskripsi Produk: </h3>

@@ -60,6 +60,7 @@ class DashboardAdminOrderController extends Controller
             "buyer" => BuyerUser::find($order->buyer_user_id),
             "orderdetails" => OrderDetail::where('order_id',$order->id)->get(),
             "laptops" => Laptop::all('id','laptop_name'),
+            "payment" => $order->payments()->orderByDesc('created_at')->first(),
         ]);
     }
 
@@ -76,6 +77,7 @@ class DashboardAdminOrderController extends Controller
             "buyer" => BuyerUser::find($order->buyer_user_id),
             "orderdetails" => OrderDetail::where('order_id',$order->id)->get(),
             "laptops" => Laptop::all('id','laptop_name'),
+            "payment" => $order->payments()->orderByDesc('created_at')->first(),
         ]);
     }
 
@@ -88,6 +90,9 @@ class DashboardAdminOrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {   
+        $payment = $order->payments()->orderByDesc('created_at')->first();
+        $payment->payment_status = $request->payment_status;
+        $payment->save();
         $order->order_status = $request->order_status;
         $order->save();
         $order->shipping_status = $request->shipping_status;

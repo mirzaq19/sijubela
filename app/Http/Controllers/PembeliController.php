@@ -176,6 +176,7 @@ class PembeliController extends Controller
         $image = $request->file('image');
         $name = time().'.'.$image->getClientOriginalExtension();
         $destinationPath = public_path('img/payment');
+        $nameWithPath = 'img/payment/'.$name;
         $image->move($destinationPath, $name);
 
         $payment = Payment::create([
@@ -184,7 +185,7 @@ class PembeliController extends Controller
             'payment_account_number' => $validatedData['account_number'],
             'payment_bank_name' => $validatedData['bank_name'],
             'payment_status' => 'waiting',
-            'payment_image' => $name,
+            'payment_image' => $nameWithPath,
         ]);
 
         return redirect()->route('buyer-order.all')->with('paymentsuccess', 'Payment added successfully!');
