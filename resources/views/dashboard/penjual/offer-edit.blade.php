@@ -35,7 +35,7 @@
 
         <p class="h2">Add New Laptop</p>
 
-        <form action="/dashboard/offer/edit/{{$sell_laptop->id}}" method="POST">
+        <form action="/dashboard/offer/edit/{{ $sell_laptop->id }}" method="POST">
             @csrf
             <div class="row g-3 pb-3">
                 <div class="col-12">
@@ -57,7 +57,8 @@
 
                     <select class="form-select @error('sell_laptop_brand') is-invalid @enderror" name="sell_laptop_brand"
                         id="sell_laptop_brand" required>
-                        <option value="{{ $sell_laptop->sell_laptop_brand }}" selected> {{ $sell_laptop->sell_laptop_brand }}
+                        <option value="{{ $sell_laptop->sell_laptop_brand }}" selected>
+                            {{ $sell_laptop->sell_laptop_brand }}
                         </option>
                         @if ($sell_laptop->sell_laptop_brand != 'Acer')
                             <option value="Acer">Acer</option>
@@ -97,7 +98,8 @@
 
                     <select class="form-select @error('sell_laptop_type') is-invalid @enderror" name="sell_laptop_type"
                         id="sell_laptop_type" required>
-                        <option value="{{ $sell_laptop->sell_laptop_type }}" selected> {{ $sell_laptop->sell_laptop_type }}
+                        <option value="{{ $sell_laptop->sell_laptop_type }}" selected>
+                            {{ $sell_laptop->sell_laptop_type }}
                         </option>
                         @if ($sell_laptop->sell_laptop_type != '2 in 1')
                             <option value="2 in 1">2 in 1</option>
@@ -203,7 +205,7 @@
                     @enderror
 
                     <input id="sell_laptop_desc" type="hidden" name="sell_laptop_desc"
-                        value="{{ old('sell_laptop_desc', $sell_laptop->sell_laptop_desc) }}"">
+                        value="{{ old('sell_laptop_desc', $sell_laptop->sell_laptop_desc) }}">
                     <trix-editor input="sell_laptop_desc"></trix-editor>
                 </div>
             </div>

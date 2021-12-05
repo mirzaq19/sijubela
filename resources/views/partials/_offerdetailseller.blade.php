@@ -81,8 +81,9 @@
 
         <div class="col-12">
             <label for="sell_laptop_desc" class="form-label">Description</label>
-            <textarea type="text" class="form-control" id="sell_laptop_desc"
-                placeholder="{{ $sell_laptop->sell_laptop_desc }}" rows="10" disabled readonly></textarea>
+            <div id="sell_laptop_desc">
+                {!! nl2br($sell_laptop->sell_laptop_desc) !!}
+            </div>
         </div>
 
     </div>
