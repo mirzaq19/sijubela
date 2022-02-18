@@ -65,9 +65,9 @@
                                     class="mx-2">{{ auth()->guard('seller_user')->user()->seller_username }}</span>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="#">Akun Saya</a></li>
+                                <li><a class="dropdown-item" href="{{ route('penjual-dashboard') }}">Akun Saya</a></li>
 
-                                <li><a class="dropdown-item" href="#">Penjualan Saya</a></li>
+                                <li><a class="dropdown-item" href="{{ route('penjual-dashboard-offers') }}">Penjualan Saya</a></li>
 
                                 <form action="/seller-logout" method="POST">
                                     @csrf
